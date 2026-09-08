@@ -56,18 +56,17 @@
     return lb > 0 ? lb * 0.453592 : null;
   }
 
-  // Asian/Indian-adjusted BMI cutoffs (ICMR / WHO Asia-Pacific), not the generic WHO scale.
   function categorize(bmi) {
     if (bmi < 18.5) {
-      return { label: 'Underweight', message: 'You may benefit from a plan to reach a healthier weight range.', high: false };
+      return { label: 'कमी वजन', message: 'निरोगी वजन गाठण्यासाठी योग्य प्लॅन उपयुक्त ठरू शकतो.', high: false };
     }
     if (bmi < 23) {
-      return { label: 'Normal weight', message: "You're within the healthy range for Indian body types. Keep it up!", high: false };
+      return { label: 'सामान्य वजन', message: 'तुम्ही भारतीय शरीररचनेनुसार सामान्य श्रेणीत आहात. असेच सुरू ठेवा!', high: false };
     }
     if (bmi < 25) {
-      return { label: 'Overweight', message: 'By Indian-adjusted (ICMR) cutoffs, this range already carries higher metabolic risk. A small, sustainable change could make a real difference.', high: true };
+      return { label: 'जास्त वजन', message: 'भारतीय-अनुकूलित (ICMR) निकषांनुसार, या श्रेणीत आधीच जास्त मेटाबॉलिक धोका असतो. एक लहान, टिकाऊ बदल खरोखर फरक करू शकतो.', high: true };
     }
-    return { label: 'Obese', message: "It's worth speaking with a doctor in person about a plan that works for you.", high: true };
+    return { label: 'लठ्ठपणा', message: 'डॉक्टरांशी प्रत्यक्ष भेटून तुमच्यासाठी योग्य प्लॅनबद्दल बोलणे योग्य ठरेल.', high: true };
   }
 
   form.addEventListener('submit', function (e) {
@@ -94,7 +93,7 @@
 
     if (cat.high) {
       var text = encodeURIComponent(
-        'Hi OBO Health, I just calculated my BMI (' + bmi.toFixed(1) + ', ' + cat.label + ') and I\'d like to talk to someone.'
+        'Hi OBO Health, मी नुकतेच माझे BMI काढले (' + bmi.toFixed(1) + ', ' + cat.label + ') आणि मला कोणाशी तरी बोलायचे आहे.'
       );
       ctaLink.href = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + text;
       ctaEl.classList.remove('hidden');
