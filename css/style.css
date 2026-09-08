@@ -15,6 +15,9 @@
   --warn-border: #fdba74;
   --whatsapp: #25d366;
   --whatsapp-dark: #1da851;
+  --illus-skin: #c68b5c;
+  --illus-hair: #2b2320;
+  --illus-accent: #e8935c;
   --radius: 14px;
   --radius-sm: 9px;
   --font-display: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -229,6 +232,13 @@ a { color: var(--sky-dark); }
   margin-bottom: 10px;
 }
 .hero-hint { font-size: 0.85rem; color: var(--muted); }
+
+.illustration {
+  max-width: 220px;
+  margin: 32px auto 0;
+}
+.illustration svg { display: block; width: 100%; height: auto; }
+.illustration-sm { max-width: 160px; margin: 0 auto 20px; }
 
 .btn {
   display: inline-flex;
@@ -564,6 +574,100 @@ a { color: var(--sky-dark); }
 .condition-card h3 { color: var(--navy); }
 .condition-card p { margin: 0; font-size: 0.9rem; }
 
+/* Icon cards (self-check, myths/facts, protein & mobility) */
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin: 24px 0;
+}
+.icon-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+}
+.icon-card .icon {
+  display: block;
+  width: 34px; height: 34px;
+  color: var(--sky-dark);
+  margin-bottom: 10px;
+}
+.icon-card .icon svg { display: block; width: 100%; height: 100%; }
+.icon-card h3 { font-size: 1rem; margin-bottom: 6px; }
+.icon-card p { margin: 0; font-size: 0.9rem; }
+
+.check-list { list-style: none; padding: 0; margin: 18px 0; }
+.check-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+.check-list li:last-child { border-bottom: none; }
+.check-list .check-icon {
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--sky-tint);
+  color: var(--sky-dark);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.myth-fact-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-bottom: 14px;
+}
+.myth-fact-card .myth { color: var(--muted); font-size: 0.92rem; margin: 0 0 8px; text-decoration: line-through; text-decoration-color: #c9433a; text-decoration-thickness: 1.5px; }
+.myth-fact-card .myth strong { color: #c9433a; text-decoration: none; }
+.myth-fact-card .fact { color: var(--ink); font-size: 0.95rem; margin: 0; }
+.myth-fact-card .fact strong { color: var(--sky-dark); }
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 24px 0;
+}
+.timeline-step {
+  display: flex;
+  gap: 18px;
+  padding-bottom: 22px;
+  position: relative;
+}
+.timeline-step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 21px; top: 44px; bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+.timeline-marker {
+  flex-shrink: 0;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  text-align: center;
+  line-height: 1.1;
+}
+.timeline-body h3 { margin-bottom: 3px; font-size: 1rem; }
+.timeline-body .timeline-dose { font-weight: 700; color: var(--sky-dark); font-size: 0.85rem; margin-bottom: 4px; }
+.timeline-body p { margin: 0; font-size: 0.9rem; }
+
 .step-list { counter-reset: step; list-style: none; padding: 0; margin: 0; }
 .step-list li {
   counter-increment: step;
@@ -753,7 +857,7 @@ a { color: var(--sky-dark); }
 
 @media (max-width: 640px) {
   .hero h1 { font-size: 2rem; }
-  .features-grid, .testimonial-grid, .condition-grid, .pricing-grid, .footer-grid { grid-template-columns: 1fr; }
+  .features-grid, .testimonial-grid, .condition-grid, .pricing-grid, .footer-grid, .icon-grid { grid-template-columns: 1fr; }
   .doctor-card { flex-direction: column; text-align: center; }
   .bmi-result { flex-direction: column; text-align: center; }
   h1 { font-size: 2rem; }
