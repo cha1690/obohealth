@@ -700,6 +700,55 @@ a { color: var(--sky-dark); }
 }
 .carousel-dots .carousel-dot.active { background: var(--sky-dark); width: 20px; }
 
+/* Photo carousel (e.g. clinic photos on the About page) */
+.photo-carousel { max-width: 640px; margin: 28px auto 0; }
+.photo-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+.photo-track::-webkit-scrollbar { display: none; }
+.photo-slide { flex: 0 0 100%; scroll-snap-align: start; }
+.photo-frame {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--border);
+}
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo-caption { margin: 12px 0 0; text-align: center; font-size: 0.88rem; font-weight: 600; color: var(--muted); }
+
+/* Lifestyle image-text cards (e.g. homepage "gain life" band) */
+.lifestyle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 8px;
+}
+.lifestyle-card {
+  position: relative;
+  min-height: 320px;
+  border-radius: var(--radius);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+.lifestyle-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(8,47,63,0.88) 0%, rgba(8,47,63,0.25) 55%, rgba(8,47,63,0) 100%);
+}
+.lifestyle-overlay { position: relative; z-index: 1; padding: 24px; width: 100%; }
+.lifestyle-overlay h3 { color: #fff; margin: 0 0 4px; font-size: 1.15rem; }
+.lifestyle-overlay p { color: rgba(255,255,255,0.9); margin: 0; font-size: 0.9rem; }
+
 .timeline {
   display: flex;
   flex-direction: column;
@@ -926,7 +975,8 @@ a { color: var(--sky-dark); }
 
 @media (max-width: 640px) {
   .hero h1 { font-size: 2rem; }
-  .features-grid, .testimonial-grid, .condition-grid, .pricing-grid, .footer-grid, .icon-grid, .icon-grid-3 { grid-template-columns: 1fr; }
+  .features-grid, .testimonial-grid, .condition-grid, .pricing-grid, .footer-grid, .icon-grid, .icon-grid-3, .lifestyle-grid { grid-template-columns: 1fr; }
+  .lifestyle-card { min-height: 220px; }
   .doctor-card { flex-direction: column; text-align: center; }
   .bmi-result { flex-direction: column; text-align: center; }
   h1 { font-size: 2rem; }

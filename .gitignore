@@ -1,0 +1,5 @@
+.DS_Store
+
+# Raw/unoptimized source images kept locally for reference — the
+# optimized .webp files actually used on the site are tracked.
+images/**/Gemini_Generated_Image_*.png
