@@ -581,6 +581,7 @@ a { color: var(--sky-dark); }
   gap: 18px;
   margin: 24px 0;
 }
+.icon-grid-3 { grid-template-columns: repeat(3, 1fr); }
 .icon-card {
   background: var(--card);
   border: 1px solid var(--border);
@@ -631,6 +632,66 @@ a { color: var(--sky-dark); }
 .myth-fact-card .myth strong { color: #c9433a; text-decoration: none; }
 .myth-fact-card .fact { color: var(--ink); font-size: 0.95rem; margin: 0; }
 .myth-fact-card .fact strong { color: var(--sky-dark); }
+
+/* Tag pills (e.g. side-effect list) */
+.tag-label { font-weight: 700; font-size: 0.88rem; color: var(--ink); margin: 0 0 10px; }
+.tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 20px; }
+.tag-list .tag {
+  display: inline-block;
+  background: var(--sky-tint);
+  color: var(--sky-dark);
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+/* Myth/fact carousel */
+.myth-carousel { margin: 24px 0 8px; }
+.myth-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+.myth-track::-webkit-scrollbar { display: none; }
+.myth-slide { flex: 0 0 100%; scroll-snap-align: start; }
+.myth-slide .myth-fact-card { margin-bottom: 0; height: 100%; }
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 16px;
+}
+.carousel-btn {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--navy);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.carousel-btn:hover { background: var(--sky-tint); border-color: var(--sky); }
+.carousel-btn:disabled { opacity: 0.35; cursor: default; }
+.carousel-btn:disabled:hover { background: var(--card); border-color: var(--border); }
+.carousel-dots { display: flex; align-items: center; gap: 6px; }
+.carousel-dots .carousel-dot {
+  width: 8px; height: 8px;
+  border-radius: 999px;
+  background: var(--border);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.carousel-dots .carousel-dot.active { background: var(--sky-dark); width: 20px; }
 
 .timeline {
   display: flex;
@@ -835,6 +896,7 @@ a { color: var(--sky-dark); }
   .pricing-grid { grid-template-columns: 1fr 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
+  .icon-grid-3 { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 768px) {
@@ -857,7 +919,7 @@ a { color: var(--sky-dark); }
 
 @media (max-width: 640px) {
   .hero h1 { font-size: 2rem; }
-  .features-grid, .testimonial-grid, .condition-grid, .pricing-grid, .footer-grid, .icon-grid { grid-template-columns: 1fr; }
+  .features-grid, .testimonial-grid, .condition-grid, .pricing-grid, .footer-grid, .icon-grid, .icon-grid-3 { grid-template-columns: 1fr; }
   .doctor-card { flex-direction: column; text-align: center; }
   .bmi-result { flex-direction: column; text-align: center; }
   h1 { font-size: 2rem; }

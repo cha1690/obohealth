@@ -35,4 +35,58 @@
       }
     });
   });
+
+  document.querySelectorAll('[data-carousel]').forEach(function (carousel) {
+    var track = carousel.querySelector('[data-track]');
+    var dotsWrap = carousel.querySelector('[data-dots]');
+    var prevBtn = carousel.querySelector('.carousel-prev');
+    var nextBtn = carousel.querySelector('.carousel-next');
+    if (!track) return;
+    var slides = Array.prototype.slice.call(track.children);
+    if (!slides.length) return;
+
+    var dots = slides.map(function (slide, i) {
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'carousel-dot';
+      dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+      dot.addEventListener('click', function () {
+        slide.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+      });
+      if (dotsWrap) dotsWrap.appendChild(dot);
+      return dot;
+    });
+
+    function activeIndex() {
+      var pos = track.scrollLeft;
+      var closest = 0, closestDist = Infinity;
+      slides.forEach(function (slide, i) {
+        var dist = Math.abs(slide.offsetLeft - pos);
+        if (dist < closestDist) { closestDist = dist; closest = i; }
+      });
+      return closest;
+    }
+
+    function updateDots() {
+      var idx = activeIndex();
+      dots.forEach(function (dot, i) { dot.classList.toggle('active', i === idx); });
+      if (prevBtn) prevBtn.disabled = idx === 0;
+      if (nextBtn) nextBtn.disabled = idx === slides.length - 1;
+    }
+
+    track.addEventListener('scroll', function () {
+      window.requestAnimationFrame(updateDots);
+    }, { passive: true });
+
+    if (prevBtn) prevBtn.addEventListener('click', function () {
+      var idx = Math.max(0, activeIndex() - 1);
+      slides[idx].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+    });
+    if (nextBtn) nextBtn.addEventListener('click', function () {
+      var idx = Math.min(slides.length - 1, activeIndex() + 1);
+      slides[idx].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+    });
+
+    updateDots();
+  });
 })();
