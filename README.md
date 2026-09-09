@@ -25,7 +25,7 @@ Search any page for bracketed text like `[Doctor's Full Name]`, `[XXXXXXX]`, or
 open/unconfirmed in the website brief (doctor name, degree, registration number, photo,
 exact clinic address & hours, real testimonials, cancellation/refund policy). Swap these
 for real content before launch. Real, already-confirmed content (WhatsApp/call number,
-Deccan Gymkhana locality, pricing tiers, medication brand) is used as-is throughout.
+JM Road locality, pricing tiers, medication brand) is used as-is throughout.
 
 The Hindi and Marathi translations are AI-drafted and should get a human review pass
 (especially medical claims and disclaimers) before publishing, per the brief's multilingual
