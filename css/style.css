@@ -334,7 +334,7 @@ a { color: var(--sky-dark); }
   color: var(--navy);
 }
 .doctor-photo svg { width: 52px; height: 52px; }
-.doctor-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; }
+.doctor-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .doctor-name { margin: 0 0 4px; font-size: 1.3rem; }
 .doctor-cred { font-weight: 600; color: var(--sky-dark); margin: 0 0 6px; font-size: 0.92rem; }
 .doctor-reg { font-size: 0.82rem; color: var(--muted); margin: 0 0 12px; }
