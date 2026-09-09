@@ -837,6 +837,7 @@ a { color: var(--sky-dark); }
   align-items: start;
   text-align: left;
 }
+.contact-grid-single { grid-template-columns: 1fr; max-width: 680px; margin: 0 auto; }
 .contact-card {
   background: var(--card);
   border: 1px solid var(--border);
@@ -852,7 +853,9 @@ a { color: var(--sky-dark); }
 .collage-bg {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 150px;
   height: 150px;
+  overflow: hidden;
 }
 .collage-bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .contact-card-content { padding: 24px; }
