@@ -207,9 +207,22 @@ a { color: var(--sky-dark); }
 
 /* Home hero */
 .hero {
+  position: relative;
   padding: 56px 0 44px;
   text-align: center;
+  overflow: hidden;
 }
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/happy_ppl/hero-cover.webp');
+  background-size: cover;
+  background-position: center 30%;
+  opacity: 0.18;
+  z-index: 0;
+}
+.hero .container { position: relative; z-index: 1; }
 .hero h1 {
   font-size: 2.6rem;
   max-width: 700px;
@@ -313,14 +326,15 @@ a { color: var(--sky-dark); }
   width: 108px;
   height: 108px;
   border-radius: 50%;
+  overflow: hidden;
   background: var(--navy-tint);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--navy);
-  border: 2px dashed var(--sky);
 }
 .doctor-photo svg { width: 52px; height: 52px; }
+.doctor-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; }
 .doctor-name { margin: 0 0 4px; font-size: 1.3rem; }
 .doctor-cred { font-weight: 600; color: var(--sky-dark); margin: 0 0 6px; font-size: 0.92rem; }
 .doctor-reg { font-size: 0.82rem; color: var(--muted); margin: 0 0 12px; }
