@@ -701,10 +701,10 @@ a { color: var(--sky-dark); }
 .carousel-dots .carousel-dot.active { background: var(--sky-dark); width: 20px; }
 
 /* Photo carousel (e.g. clinic photos on the About page) */
-.photo-carousel { max-width: 640px; margin: 28px auto 0; }
+.photo-carousel { max-width: 620px; margin: 28px auto 0; }
 .photo-track {
   display: flex;
-  gap: 16px;
+  gap: 14px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
@@ -712,15 +712,14 @@ a { color: var(--sky-dark); }
   padding-bottom: 2px;
 }
 .photo-track::-webkit-scrollbar { display: none; }
-.photo-slide { flex: 0 0 100%; scroll-snap-align: start; }
+.photo-slide { flex: 0 0 180px; scroll-snap-align: start; }
 .photo-frame {
   aspect-ratio: 4 / 3;
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   overflow: hidden;
   background: var(--border);
 }
 .photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.photo-caption { margin: 12px 0 0; text-align: center; font-size: 0.88rem; font-weight: 600; color: var(--muted); }
 
 /* Lifestyle image-text cards (e.g. homepage "gain life" band) */
 .lifestyle-grid {
@@ -833,6 +832,17 @@ a { color: var(--sky-dark); }
 .contact-card h3 { margin-bottom: 10px; }
 .contact-card p { margin: 0 0 6px; font-size: 0.95rem; color: var(--ink); }
 .contact-card .contact-ctas { margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* Contact card with a clinic-photo collage banner above the address text */
+.contact-card-collage { padding: 0; overflow: hidden; }
+.collage-bg {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 150px;
+}
+.collage-bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.contact-card-content { padding: 24px; }
+
 .map-embed { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
 .map-embed iframe { width: 100%; height: 320px; border: 0; display: block; }
 .locality-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
