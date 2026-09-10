@@ -4,4 +4,5 @@
 # optimized .webp files actually used on the site are tracked.
 images/**/Gemini_Generated_Image_*.png
 images/happy_ppl/girl_at_top.png
+images/happy_ppl/ChatGPT Image*.png
 images/pune_clinic/dr-yogini-lohokare.jpg
