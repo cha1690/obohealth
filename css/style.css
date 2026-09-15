@@ -807,7 +807,7 @@ a { color: var(--sky-dark); }
   color: var(--sky-pale);
   line-height: 1;
 }
-.stat-callout p { margin: 0; font-size: 0.92rem; line-height: 1.5; }
+.stat-callout p { margin: 0; font-size: 0.92rem; line-height: 1.5; color: #fff; }
 .stat-callout strong { color: #fff; }
 
 /* Callout box (regulatory / info note) */
