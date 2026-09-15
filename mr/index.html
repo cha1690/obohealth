@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'; frame-src https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 <title>OBO Health — पुण्यात वजन कमी करणे, मधुमेह व मेटाबॉलिक केअर</title>
 <meta name="description" content="पुण्यातील क्लिनिक-फर्स्ट मेटाबॉलिक हेल्थ प्रोग्राम. प्रत्यक्ष तपासणी, डॉक्टरांनी लिहून दिलेले GLP-1 औषध, डॉक्टरांच्या मार्गदर्शनाखाली पोषण सल्ला — कोणतेही व्हिडिओ-कॉल प्रिस्क्रिप्शन नाही.">
 <link rel="canonical" href="https://obohealth.in/">
@@ -28,7 +29,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "MedicalClinic", "@id": "https://obohealth.in/#clinic", "name": "OBO Health", "url": "https://obohealth.in/", "logo": "https://obohealth.in/images/favicon.svg", "telephone": "92220660848", "priceRange": "₹₹", "address": {"@type": "PostalAddress", "streetAddress": "3rd Floor, 302, Jangali Maharaj Road, above Levi's Showroom, opposite Sambhaji Park", "addressLocality": "Pune", "addressRegion": "Maharashtra", "postalCode": "411004", "addressCountry": "IN"}, "areaServed": {"@type": "City", "name": "Pune"}, "openingHoursSpecification": {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "10:30", "closes": "15:30"}, "medicalSpecialty": "WeightManagement, Endocrinology, Nutrition"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "MedicalClinic", "@id": "https://obohealth.in/#clinic", "name": "OBO Health", "url": "https://obohealth.in/", "logo": "https://obohealth.in/images/favicon.svg", "telephone": "+919220660898", "priceRange": "₹₹", "address": {"@type": "PostalAddress", "streetAddress": "3rd Floor, 302, Jangali Maharaj Road, above Levi's Showroom, opposite Sambhaji Park", "addressLocality": "Pune", "addressRegion": "Maharashtra", "postalCode": "411004", "addressCountry": "IN"}, "areaServed": {"@type": "City", "name": "Pune"}, "openingHoursSpecification": {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "10:00", "closes": "16:00"}, "medicalSpecialty": "WeightManagement, Endocrinology, Nutrition"}</script>
 </head>
 <body>
 
@@ -38,17 +39,18 @@
       <span class="logo-obo">OBO</span>
       <span class="logo-health">HEALTH</span>
     </a>
-    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <div class="header-actions">
+      <span class="lang-switch"><a href="/" class="">EN</a><span>|</span><a href="/hi/" class="">HI</a><span>|</span><a href="/mr/" class="active">MR</a></span>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
     <nav class="main-nav">
-      <a href="/mr/bmi-calculator/" class="tools-link">BMI कॅल्क्युलेटर</a>
       <a href="/mr/how-it-works/">कसे काम करते</a>
       <a href="/mr/pricing/">किंमत</a>
       <a href="/mr/compare/">तुलना करा</a>
       <a href="/mr/about/">आमच्याबद्दल</a>
       <a href="/mr/faq/">वारंवार विचारले जाणारे प्रश्न</a>
       <a href="/mr/contact/">संपर्क</a>
-      <span class="lang-switch"><a href="/" class="">EN</a><span>|</span><a href="/hi/" class="">HI</a><span>|</span><a href="/mr/" class="active">MR</a></span>
-    </nav>
+      </nav>
   </div>
 </header>
 
@@ -58,11 +60,11 @@
   <div class="hero-flex">
     <div class="hero-content">
       <p class="eyebrow">आता पुण्यात</p>
-      <h1>वजन कमी करा.<span class="hero-h1-accent">आयुष्य वाढवा.</span></h1>
+      <h1>वजन कमी करा. <span class="hero-h1-accent">आयुष्य वाढवा.</span></h1>
       <p class="hero-sub">डॉक्टरांच्या मार्गदर्शनाखाली GLP-1 केअर — प्रत्यक्ष तपासणी, कधीही व्हिडिओ कॉलवर नाही. वजन कमी करा, आणि पुन्हा स्वतःसारखे वाटू द्या.</p>
       <div class="hero-ctas">
-        <a href="https://wa.me/92220660848?text=Hi%20OBO%20Health%2C%20I%27d%20like%20to%20book%20my%20first%20consultation." target="_blank" rel="noopener" class="btn btn-accent">तुमचा प्रवास सुरू करा <span aria-hidden="true">→</span></a>
-        <a href="tel:92220660848" class="btn btn-outline">आता कॉल करा</a>
+        <a href="https://wa.me/919220660898?text=Hi%20OBO%20Health%2C%20I%27d%20like%20to%20book%20my%20first%20consultation." target="_blank" rel="noopener" class="btn btn-accent">शेड्यूल करण्यासाठी व्हॉट्सअ‍ॅपवर मेसेज करा <span aria-hidden="true">→</span></a>
+        <a href="tel:+919220660898" class="btn btn-outline">आता कॉल करा</a>
       </div>
       <p class="hero-locality"><span class="locality-tag">📍 जेएम रोड, पुणे</span></p>
       <div class="hero-benefits">
@@ -87,15 +89,29 @@
   </div>
 </section>
 
+<section class="section physician-strip">
+  <div class="container">
+    <div class="doctor-card doctor-card-compact">
+      <div class="doctor-photo"><img src="/images/pune_clinic/dr-yogini.webp" alt="डॉ. योगिनी लोहोकरे"></div>
+      <div>
+        <p class="doctor-name">डॉ. योगिनी लोहोकरे</p>
+        <p class="doctor-cred">MBBS, MD (जनरल मेडिसिन) — जनरल फिजिशियन</p>
+        <p class="doctor-reg">एकूण 17 वर्षांचा क्लिनिकल अनुभव</p>
+        <a href="/mr/about/" class="doctor-link">डॉ. लोहोकरे यांच्याबद्दल अधिक जाणून घ्या <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="features-section">
   <div class="container">
     <h2 class="section-title text-center">OBO Health का?</h2>
     <p class="section-sub">तुम्ही रांगेतील एक नंबर किंवा चॅट तिकीट नाही आहात. तुम्ही अशी व्यक्ती आहात, ज्याला आम्ही प्रत्येक भेटीत अधिक चांगल्या प्रकारे ओळखतो.</p>
     <div class="features-grid">
-      <div class="feature"><span class="dot"></span><h3>तुमचं नाव माहीत असणारा डॉक्टर</h3><p>सतत बदलणारा डॉक्टर नाही — तोच डॉक्टर तुम्हाला भेटतो, तुमची कहाणी लक्षात ठेवतो, आणि तुम्हाला खरोखर ओळखत असल्यामुळेच तुमची काळजी ठरवतो.</p></div>
-      <div class="feature"><span class="dot"></span><h3>ऐकण्यासाठी वेळ, फक्त निपटण्यासाठी नाही</h3><p>तुमच्या भेटी घाईघाईने आटोपलेल्या दहा मिनिटांच्या नाहीत. तुम्हाला खरंच कसं वाटतंय हे सांगायला पुरेसा वेळ मिळतो, आणि काहीही ठरवण्याआधी ऐकणारा डॉक्टर मिळतो.</p></div>
-      <div class="feature"><span class="dot"></span><h3>फक्त औषध नाही, आधी तपासणी</h3><p>कोणतंही औषध सुरू होण्यापूर्वी, तुमचे डॉक्टर तुमच्यासोबत बसतात आणि प्रत्यक्ष तुमची तपासणी करतात — कारण तुमच्या आरोग्याला फक्त फॉर्म आणि अंदाजापेक्षा जास्त काहीतरी हवं आहे.</p></div>
-      <div class="feature"><span class="dot"></span><h3>तुमच्या आयुष्याला साजेसं मार्गदर्शन</h3><p>ही गोष्ट फक्त वजनाच्या आकड्याबद्दल नाही. तुमचे डॉक्टर औषधासोबतच थेट तुमच्या प्रथिनांच्या सेवनात व सक्रियतेत मार्गदर्शन करतात — टिकणाऱ्या सवयी घडवत, सर्वसाधारण डाएट PDF नाही.</p></div>
+      <div class="feature"><h3>तुमचं नाव माहीत असणारा डॉक्टर</h3><p>प्रत्येक भेटीत तोच डॉक्टर तुम्हाला भेटतो — सतत बदलणारा डॉक्टर नाही.</p></div>
+      <div class="feature"><h3>ऐकण्यासाठी वेळ, फक्त निपटण्यासाठी नाही</h3><p>घाईघाईचे दहा मिनिट नाहीत — काहीही ठरवण्याआधी ऐकणारा डॉक्टर मिळतो.</p></div>
+      <div class="feature"><h3>फक्त औषध नाही, आधी तपासणी</h3><p>कोणतंही औषध सुरू होण्यापूर्वी, तुमचे डॉक्टर प्रत्यक्ष तुमची तपासणी करतात.</p></div>
+      <div class="feature"><h3>तुमच्या आयुष्याला साजेसं मार्गदर्शन</h3><p>औषधासोबतच प्रथिने व सक्रियतेतही मार्गदर्शन — सर्वसाधारण डाएट PDF नाही.</p></div>
     </div>
   </div>
 </section>
@@ -149,19 +165,19 @@
         <div class="testimonial-top"><div class="testimonial-avatar">PS</div><div><p class="testimonial-name">प्रिया एस.</p></div></div>
         <p class="testimonial-metric">13 किलो कमी</p>
         <p class="testimonial-headline">"मी स्वतःला उपाशी ठेवणं बंद केलं, आणि सुरुवातीचे साइड इफेक्ट्सही लवकर कमी झाले."</p>
-        <p class="testimonial-quote">"वजन कमी करणं म्हणजे पोळी-भात पूर्णपणे बंद करणं असं मला वाटायचं. GLP-1 थेरपी सुरू करणं हा गेम-चेंजर ठरला — पहिल्या दोन आठवड्यांत थोडी मळमळ जाणवली, पण शरीर सरावल्यावर ती लवकर कमी झाली. सहा महिन्यांत, नेहमीच्या घरगुती जेवणासोबत फक्त पोर्शन कंट्रोल शिकून मी 13 किलो वजन कमी केलं — सतत भूक न लागता."</p>
+        <p class="testimonial-quote">"GLP-1 थेरपी सुरू करणं हा गेम-चेंजर ठरला. सहा महिन्यांत, नेहमीच्या घरगुती जेवणासोबत फक्त पोर्शन कंट्रोल शिकून मी 13 किलो वजन कमी केलं — सतत भूक न लागता."</p>
       </div>
       <div class="testimonial-card">
         <div class="testimonial-top"><div class="testimonial-avatar">RV</div><div><p class="testimonial-name">रोहन व्ही.</p></div></div>
         <p class="testimonial-metric">10 किलो कमी</p>
         <p class="testimonial-headline">"मला फक्त 4 महिन्यांच्या छोट्या प्रोग्रामची गरज होती."</p>
-        <p class="testimonial-quote">"मोठ्या शिफ्ट्स आणि सतत डेस्क वर्कमध्ये, मी अनेक वर्षं वजन व्यवस्थापनाशी झगडत होतो. मी 4 महिन्यांचा GLP-1 प्रोग्राम सुरू केला, 10 किलो वजन कमी केलं, आणि सोबत टिकाऊ सवयीही तयार केल्या. 4 महिन्यांनंतर मी उपचार थांबवले कारण त्याची गरज उरली नव्हती, आणि तेव्हापासून माझं वजन अजिबात वाढलेलं नाही."</p>
+        <p class="testimonial-quote">"मी 4 महिन्यांचा GLP-1 प्रोग्राम सुरू केला, 10 किलो वजन कमी केलं, आणि टिकाऊ सवयी तयार केल्या — तेव्हापासून माझं वजन अजिबात वाढलेलं नाही."</p>
       </div>
       <div class="testimonial-card">
         <div class="testimonial-top"><div class="testimonial-avatar">AP</div><div><p class="testimonial-name">अनन्या पी.</p></div></div>
         <p class="testimonial-metric">7 किलो कमी</p>
         <p class="testimonial-headline">"सुरुवात करण्यापूर्वी झालेल्या संपूर्ण रक्त तपासणीनेच खरा फरक केला."</p>
-        <p class="testimonial-quote">"मी फक्त वजन कमी करण्यासाठी आले होते, आणि सुरुवात करण्यापूर्वी झालेली सविस्तर रक्त तपासणी अपेक्षेपेक्षा खूपच सखोल होती. सहा महिन्यांत मी 7 किलो वजन कमी केलं, आणि आता आम्ही हळूहळू माझा डोस कमी करण्याच्या सुनियोजित योजनेवर आहोत. कधीही अंदाजाने काही झालं नाही — प्रत्येक टप्पा समजावून सांगितला गेला."</p>
+        <p class="testimonial-quote">"सुरुवात करण्यापूर्वी झालेली रक्त तपासणी अपेक्षेपेक्षा खूपच सखोल होती. सहा महिन्यांत मी 7 किलो वजन कमी केलं, आणि प्रत्येक टप्पा समजावून सांगितला गेला."</p>
       </div>
     </div>
   </div>
@@ -170,133 +186,36 @@
 <section id="pricing" class="pricing-section">
   <div class="container">
     <h2 class="section-title text-center">किंमत आणि प्लॅन्स</h2>
-    <p class="section-sub">आत्ताच सल्ला घ्या, किंवा थेट उपचार सुरू करा — चार सोपे पर्याय. प्रत्येक किमतीत सल्ला, लॅब तपासणी आणि औषध समाविष्ट आहे, कोणताही लपलेला खर्च नाही.</p>
-    
-      <div class="pricing-grid">
+    <p class="section-sub">आत्ताच सल्ला घ्या, किंवा थेट उपचार सुरू करा. प्रत्येक प्लॅन सर्वसमावेशक आहे — सल्ला, लॅब तपासणी आणि औषध समाविष्ट, कोणताही लपलेला खर्च नाही.</p>
+
+      <div class="pricing-grid pricing-grid-2">
         <div class="plan-card">
           <h3>बेसिक</h3>
           <p class="plan-sub">पहिला सल्ला</p>
-          <p class="plan-price">₹2,200 <small>एकदाच</small></p>
           <ul>
             <li>संपूर्ण रक्त तपासणी (96 पॅरामीटर्स)</li>
             <li>प्रत्यक्ष डॉक्टर सल्ला</li>
             <li>आरोग्य व पोषण कोचिंग सत्र</li>
             <li>औषध नाही — फक्त निदान भेट</li>
           </ul>
-          <p class="plan-note">अजून खात्री नाही? इथून सुरुवात करा.</p>
-        </div>
-        <div class="plan-card">
-          <h3>स्टार्टर</h3>
-          <p class="plan-sub">1 महिना</p>
-          <ul>
-            <li>संपूर्ण डायग्नोस्टिक रक्त तपासणी</li>
-            <li>डोस निश्चित होईपर्यंत (टायट्रेशन) साप्ताहिक प्रत्यक्ष डॉक्टर भेटी</li>
-            <li>1 महिन्याचे GLP-1 औषध</li>
-            <li>व्हॉट्सअ‍ॅप रिमाइंडर</li>
-          </ul>
-          <p class="plan-note">दीर्घकालीन बांधिलकी नाही — दर महिन्याला नूतनीकरण होते.</p>
-        </div>
-        <div class="plan-card">
-          <h3>एसेन्शियल</h3>
-          <p class="plan-sub">3 महिने</p>
-          <ul>
-            <li>दर महिन्याला रक्त तपासणी, जेणेकरून डोस बदलताना तुमची प्रगती ट्रॅक होईल</li>
-            <li>टायट्रेशन दरम्यान साप्ताहिक भेटी, नंतर डॉक्टरांच्या सल्ल्यानुसार चेक-इन</li>
-            <li>3 महिन्यांचे GLP-1 औषध, हळूहळू तुमच्या योग्य डोसपर्यंत वाढवला जातो</li>
-            <li>व्हॉट्सअ‍ॅप व्हॉल्ट: कोचिंग, व्यायाम व प्रगती ट्रॅकिंग</li>
-            <li>डोसमध्ये बदल आवश्यक असल्यास एक अतिरिक्त चेक-इन भेट समाविष्ट</li>
-          </ul>
-          <p class="plan-note">मासिक भरण्यापेक्षा अधिक चांगली व्हॅल्यू.</p>
+          <p class="plan-note">अजून खात्री नाही? इथून सुरुवात करा — कोणत्याही बांधिलकीशिवाय संपूर्ण तपासणी व डॉक्टर भेट.</p>
         </div>
         <div class="plan-card plan-highlight">
           <p class="plan-badge">बेस्ट व्हॅल्यू</p>
           <h3>कोर केअर</h3>
-          <p class="plan-sub">12 महिने</p>
+          <p class="plan-sub">संपूर्ण प्रोग्राम</p>
           <ul>
-            <li>पहिले 4 महिने दर महिन्याला रक्त तपासणी, नंतर त्रैमासिक</li>
+            <li>टायट्रेशन दरम्यान दर महिन्याला रक्त तपासणी, नंतर डॉक्टरांच्या सल्ल्यानुसार</li>
             <li>टायट्रेशन दरम्यान साप्ताहिक भेटी, नंतर देखभाल (मेंटेनन्स) टप्प्यात सतत चेक-इन</li>
-            <li>12 महिन्यांचे GLP-1 औषध — पूर्ण टायट्रेशन, तसेच वजन टिकवण्यासाठी मेंटेनन्स डोस</li>
-            <li>व्हॉट्सअ‍ॅप व्हॉल्ट: कोचिंग, व्यायाम व प्रगती ट्रॅकिंग</li>
-            <li>जेव्हा गरज असेल तेव्हा अमर्यादित डोस-समायोजन भेटी</li>
-            <li>तुमच्या केअर टीमकडून प्राधान्याने व्हॉट्सअ‍ॅप प्रतिसाद</li>
+            <li>GLP-1 औषध — पूर्ण टायट्रेशन, तसेच वजन टिकवण्यासाठी मेंटेनन्स डोस</li>
+            <li>व्हॉट्सअ‍ॅप कोर केअर चॅनल: कोचिंग, व्यायाम व प्रगती ट्रॅकिंग</li>
+            <li>जेव्हा गरज असेल तेव्हा अमर्यादित डोस-समायोजन भेटी, तसेच तुमच्या केअर टीमकडून प्राधान्याने व्हॉट्सअ‍ॅप प्रतिसाद</li>
+            <li>डॉक्टरांच्या सल्ल्यानुसार 1, 4 किंवा 12 महिन्यांसाठी सानुकूलित करता येते</li>
           </ul>
-          <p class="plan-note">हाच एकमेव प्लॅन आहे जो मेंटेनन्स टप्प्यातही तुमच्यासोबत असतो.</p>
+          <p class="plan-note">हाच प्लॅन आहे जो मेंटेनन्स टप्प्यातही तुमच्यासोबत असतो.</p>
         </div>
       </div>
-      <p class="disclaimer" style="margin-top:24px;">डॉक्टरांच्या सल्ल्यानंतर अधिक जाणून घ्या.</p>
-  </div>
-</section>
-
-<section id="bmi" class="bmi-section">
-  <div class="container">
-    <h2>तुमचा BMI तपासा</h2>
-    <p class="section-sub">खाली तुमची उंची व वजन भरा. आम्ही भारतीय-अनुकूलित (ICMR) निकष वापरतो, सामान्य WHO स्केल नाही — तुमचा डेटा याच पानावर राहतो, आम्ही काहीही सेव्ह करत नाही.</p>
-    <div class="illustration illustration-sm"><svg viewBox="0 0 280 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a person nervous about stepping on a weighing scale">
-  <ellipse cx="140" cy="248" rx="75" ry="7" fill="var(--border)"/>
-  <rect x="65" y="205" width="150" height="28" rx="10" fill="var(--navy)"/>
-  <rect x="98" y="188" width="84" height="22" rx="6" fill="#ffffff" stroke="var(--border)" stroke-width="1.5"/>
-  <text x="140" y="204" text-anchor="middle" font-size="15" font-weight="800" fill="#c9433a" font-family="Poppins, sans-serif">?!</text>
-  <line x1="122" y1="205" x2="122" y2="170" stroke="var(--illus-skin)" stroke-width="16" stroke-linecap="round"/>
-  <line x1="158" y1="205" x2="158" y2="170" stroke="var(--illus-skin)" stroke-width="16" stroke-linecap="round"/>
-  <rect x="103" y="112" width="74" height="66" rx="32" fill="var(--sky)"/>
-  <line x1="108" y1="130" x2="78" y2="95" stroke="var(--illus-skin)" stroke-width="15" stroke-linecap="round"/>
-  <line x1="172" y1="130" x2="202" y2="95" stroke="var(--illus-skin)" stroke-width="15" stroke-linecap="round"/>
-  <circle cx="140" cy="78" r="40" fill="var(--illus-skin)"/>
-  <ellipse cx="140" cy="52" rx="42" ry="17" fill="var(--illus-hair)"/>
-  <ellipse cx="125" cy="80" rx="5" ry="8" fill="#241f1c"/>
-  <ellipse cx="155" cy="80" rx="5" ry="8" fill="#241f1c"/>
-  <path d="M116 66q9-6 17-2" stroke="#241f1c" stroke-width="3" stroke-linecap="round" fill="none"/>
-  <path d="M147 64q8-4 17 2" stroke="#241f1c" stroke-width="3" stroke-linecap="round" fill="none"/>
-  <path d="M126 100q14-8 28 0" stroke="#241f1c" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-  <path d="M175 55c5 7 8 11 8 15a8 8 0 11-16 0c0-4 3-8 8-15z" fill="var(--sky)"/>
-</svg></div>
-    
-      <form id="bmi-form" class="bmi-card" autocomplete="off">
-        <div class="field-group">
-          <label>उंची</label>
-          <div class="unit-toggle" data-target="height">
-            <button type="button" class="unit-btn active" data-unit="cm">cm</button>
-            <button type="button" class="unit-btn" data-unit="ftin">ft / in</button>
-          </div>
-          <div class="unit-fields" id="height-cm">
-            <input type="number" id="height-cm-input" min="50" max="272" step="0.1" placeholder="उदा. 170" inputmode="decimal">
-            <span class="unit-label">cm</span>
-          </div>
-          <div class="unit-fields hidden" id="height-ftin">
-            <input type="number" id="height-ft-input" min="1" max="8" step="1" placeholder="ft" inputmode="numeric">
-            <span class="unit-label">ft</span>
-            <input type="number" id="height-in-input" min="0" max="11" step="1" placeholder="in" inputmode="numeric">
-            <span class="unit-label">in</span>
-          </div>
-        </div>
-        <div class="field-group">
-          <label>वजन</label>
-          <div class="unit-toggle" data-target="weight">
-            <button type="button" class="unit-btn active" data-unit="kg">kg</button>
-            <button type="button" class="unit-btn" data-unit="lb">lb</button>
-          </div>
-          <div class="unit-fields" id="weight-kg">
-            <input type="number" id="weight-kg-input" min="20" max="300" step="0.1" placeholder="उदा. 65" inputmode="decimal">
-            <span class="unit-label">kg</span>
-          </div>
-          <div class="unit-fields hidden" id="weight-lb">
-            <input type="number" id="weight-lb-input" min="44" max="660" step="0.1" placeholder="उदा. 143" inputmode="decimal">
-            <span class="unit-label">lb</span>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-accent btn-full">BMI काढा</button>
-        <p id="bmi-error" class="error hidden">कृपया तुमची उंची व वजन भरा.</p>
-      </form>
-      <div id="bmi-result" class="bmi-result hidden">
-        <div class="result-number"><span id="bmi-value">--</span><small>BMI</small></div>
-        <div class="result-detail"><p id="bmi-category" class="category">--</p><p id="bmi-message" class="message"></p></div>
-      </div>
-      <div id="bmi-cta" class="bmi-cta hidden">
-        <p>तुमचा निकाल सुचवतो की OBO Health चा प्रोग्राम तुम्हाला मदत करू शकतो. खऱ्या डॉक्टरांशी बोला — कोणताही दबाव नाही, कोणतीही बांधिलकी नाही.</p>
-        <a id="cta-whatsapp-link" href="#" target="_blank" rel="noopener" class="btn btn-whatsapp">व्हॉट्सअ‍ॅपवर आमच्याशी चॅट करा</a>
-      </div>
-
-    <p class="disclaimer">BMI हे एक सामान्य स्क्रीनिंग साधन आहे आणि आरोग्याच्या स्थितीचे निदान करत नाही. हे स्नायू, हाडांची घनता किंवा शरीररचना विचारात घेत नाही. वैयक्तिक वैद्यकीय सल्ल्यासाठी कृपया आरोग्य तज्ज्ञांना प्रत्यक्ष भेटा.</p>
+      <p class="disclaimer" style="margin-top:24px;">डॉक्टरांच्या सल्ल्यावेळी किंमत सांगितली जाईल.</p>
   </div>
 </section>
 
@@ -309,11 +228,27 @@
         <div class="contact-card">
           <h3>क्लिनिकचा पत्ता</h3>
           <p>OBO Health<br>तिसरा मजला, 302, जंगली महाराज रोड, Levi's शोरूमच्या वर, संभाजी पार्कसमोर, पुणे, महाराष्ट्र 411004</p>
-          <p><strong>वेळ:</strong> सोमवार – शुक्रवार, सकाळी 10:30 – दुपारी 3:30</p>
+          <p><strong>वेळ:</strong> सोमवार – शुक्रवार, सकाळी 10:00 – सायंकाळी 4:00</p>
           <div class="contact-ctas">
-            <a href="https://wa.me/92220660848" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm">व्हॉट्सअ‍ॅप करा</a>
-            <a href="tel:92220660848" class="btn btn-outline btn-sm">आता कॉल करा</a>
+            <a href="https://wa.me/919220660898?text=Hi%20OBO%20Health%2C%20I%27d%20like%20to%20book%20my%20first%20consultation." target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm">शेड्यूल करण्यासाठी व्हॉट्सअ‍ॅपवर मेसेज करा</a>
+            <a href="tel:+919220660898" class="btn btn-outline btn-sm">आता कॉल करा</a>
           </div>
+          <form class="callback-form" data-callback-form aria-label="कॉलबॅकची विनंती करा">
+            <p class="callback-form-title">किंवा, कॉलबॅकची विनंती करा</p>
+            <div class="callback-form-row">
+              <div class="callback-form-field">
+                <label for="cb-name-home">नाव</label>
+                <input type="text" id="cb-name-home" name="name" required autocomplete="name" placeholder="तुमचे नाव">
+              </div>
+              <div class="callback-form-field">
+                <label for="cb-phone-home">फोन</label>
+                <input type="tel" id="cb-phone-home" name="phone" required autocomplete="tel" inputmode="tel" placeholder="10-अंकी मोबाइल नंबर">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-whatsapp btn-sm btn-full">व्हॉट्सअ‍ॅपवर कॉलबॅकची विनंती करा</button>
+            <p class="callback-form-error hidden">कृपया तुमचे नाव व वैध फोन नंबर टाका.</p>
+            <p class="callback-form-hint">आम्ही तुम्हाला शेड्यूल करण्यासाठी व्हॉट्सअ‍ॅपवर मेसेज करू — कोणताही स्पॅम नाही, अनावश्यक कॉल नाही.</p>
+          </form>
         </div>
         <div class="map-embed">
           <iframe src="https://maps.google.com/maps?q=302+Jangali+Maharaj+Road%2C+Pune%2C+Maharashtra+411004&z=17&output=embed" loading="lazy" title="OBO Health क्लिनिकचा नकाशा" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -337,11 +272,9 @@
         <h4>एक्सप्लोर करा</h4>
         <ul class="footer-links">
           <li><a href="/mr/how-it-works/">कसे काम करते</a></li>
-          <li><a href="/mr/glp-1/">GLP-1 समजून घ्या</a></li>
           <li><a href="/mr/protein-and-mobility/">प्रथिने व सक्रियता</a></li>
           <li><a href="/mr/pricing/">किंमत</a></li>
           <li><a href="/mr/compare/">अ‍ॅप्स वि. OBO क्लिनिक</a></li>
-          <li><a href="/mr/bmi-calculator/">BMI कॅल्क्युलेटर</a></li>
           <li><a href="/mr/faq/">वारंवार विचारले जाणारे प्रश्न</a></li>
           <li><a href="/mr/contact/">संपर्क</a></li>
         </ul>
@@ -349,8 +282,8 @@
       <div>
         <h4>संपर्क</h4>
         <ul class="footer-links">
-          <li><a href="https://wa.me/92220660848" target="_blank" rel="noopener">व्हॉट्सअॅप करा</a></li>
-          <li><a href="tel:92220660848">कॉल करा 92220660848</a></li>
+          <li><a href="https://wa.me/919220660898" target="_blank" rel="noopener">व्हॉट्सअॅप करा</a></li>
+          <li><a href="tel:+919220660898">कॉल करा +91 92206 60898</a></li>
           <li>जेएम रोड, पुणे</li>
           <li><a href="/mr/contact/">पत्ता आणि वेळ</a></li>
         </ul>
@@ -364,6 +297,5 @@
 </footer>
 
 <script src="/js/main.js"></script>
-<script src="/js/bmi.mr.js"></script>
 </body>
 </html>

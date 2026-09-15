@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'; frame-src https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 <title>मूल्य — OBO Health पुणे के प्लान व कीमतें</title>
 <meta name="description" content="OBO Health के व्यक्तिगत वज़न घटाना, डायबिटीज़ व मेटाबॉलिक केयर प्रोग्राम की पारदर्शी, ऑल-इन प्राइसिंग। कंसल्टेशन, लैब टेस्ट व दवा शामिल।">
 <link rel="canonical" href="https://obohealth.in/pricing/">
@@ -28,7 +29,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "MedicalClinic", "@id": "https://obohealth.in/#clinic", "name": "OBO Health", "url": "https://obohealth.in/", "logo": "https://obohealth.in/images/favicon.svg", "telephone": "92220660848", "priceRange": "₹₹", "address": {"@type": "PostalAddress", "streetAddress": "3rd Floor, 302, Jangali Maharaj Road, above Levi's Showroom, opposite Sambhaji Park", "addressLocality": "Pune", "addressRegion": "Maharashtra", "postalCode": "411004", "addressCountry": "IN"}, "areaServed": {"@type": "City", "name": "Pune"}, "openingHoursSpecification": {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "10:30", "closes": "15:30"}, "medicalSpecialty": "WeightManagement, Endocrinology, Nutrition"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "MedicalClinic", "@id": "https://obohealth.in/#clinic", "name": "OBO Health", "url": "https://obohealth.in/", "logo": "https://obohealth.in/images/favicon.svg", "telephone": "+919220660898", "priceRange": "₹₹", "address": {"@type": "PostalAddress", "streetAddress": "3rd Floor, 302, Jangali Maharaj Road, above Levi's Showroom, opposite Sambhaji Park", "addressLocality": "Pune", "addressRegion": "Maharashtra", "postalCode": "411004", "addressCountry": "IN"}, "areaServed": {"@type": "City", "name": "Pune"}, "openingHoursSpecification": {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "10:00", "closes": "16:00"}, "medicalSpecialty": "WeightManagement, Endocrinology, Nutrition"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://obohealth.in/hi/"}, {"@type": "ListItem", "position": 2, "name": "मूल्य", "item": "https://obohealth.in/hi/pricing/"}]}</script>
 </head>
 <body>
@@ -39,17 +40,18 @@
       <span class="logo-obo">OBO</span>
       <span class="logo-health">HEALTH</span>
     </a>
-    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <div class="header-actions">
+      <span class="lang-switch"><a href="/pricing/" class="">EN</a><span>|</span><a href="/hi/pricing/" class="active">HI</a><span>|</span><a href="/mr/pricing/" class="">MR</a></span>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
     <nav class="main-nav">
-      <a href="/hi/bmi-calculator/" class="tools-link">BMI कैलकुलेटर</a>
       <a href="/hi/how-it-works/">कैसे काम करता है</a>
       <a href="/hi/pricing/">मूल्य</a>
       <a href="/hi/compare/">तुलना करें</a>
       <a href="/hi/about/">हमारे बारे में</a>
       <a href="/hi/faq/">सामान्य प्रश्न</a>
       <a href="/hi/contact/">संपर्क करें</a>
-      <span class="lang-switch"><a href="/pricing/" class="">EN</a><span>|</span><a href="/hi/pricing/" class="active">HI</a><span>|</span><a href="/mr/pricing/" class="">MR</a></span>
-    </nav>
+      </nav>
   </div>
 </header>
 
@@ -66,11 +68,10 @@
 <section class="pricing-section">
   <div class="container">
     
-      <div class="pricing-grid">
+      <div class="pricing-grid pricing-grid-2">
         <div class="plan-card">
           <h3>बेसिक</h3>
           <p class="plan-sub">पहली कंसल्टेशन</p>
-          <p class="plan-price">₹2,200 <small>एक बार</small></p>
           <ul>
             <li>पूरा ब्लड पैनल (96 पैरामीटर)</li>
             <li>व्यक्तिगत डॉक्टर कंसल्टेशन</li>
@@ -79,46 +80,23 @@
           </ul>
           <p class="plan-note">अभी तय नहीं? यहीं से शुरू करें।</p>
         </div>
-        <div class="plan-card">
-          <h3>स्टार्टर</h3>
-          <p class="plan-sub">1 महीना</p>
-          <ul>
-            <li>पूरा डायग्नोस्टिक ब्लड पैनल</li>
-            <li>खुराक तय होने तक (टाइट्रेशन) साप्ताहिक व्यक्तिगत डॉक्टर विज़िट</li>
-            <li>1 महीने की GLP-1 दवा</li>
-            <li>व्हाट्सएप रिमाइंडर</li>
-          </ul>
-          <p class="plan-note">कोई लंबी अवधि की प्रतिबद्धता नहीं — हर महीने रिन्यू होता है।</p>
-        </div>
-        <div class="plan-card">
-          <h3>एसेंशियल</h3>
-          <p class="plan-sub">3 महीने</p>
-          <ul>
-            <li>हर महीने ब्लड पैनल, ताकि खुराक बदलने के साथ आपकी प्रगति ट्रैक हो सके</li>
-            <li>टाइट्रेशन के दौरान साप्ताहिक विज़िट, फिर डॉक्टर की सलाह अनुसार चेक-इन</li>
-            <li>3 महीने की GLP-1 दवा, धीरे-धीरे आपकी सही खुराक तक बढ़ाई जाती है</li>
-            <li>व्हाट्सएप वॉल्ट: कोचिंग, एक्सरसाइज़ व प्रोग्रेस ट्रैकिंग</li>
-            <li>खुराक में बदलाव ज़रूरी हो तो एक अतिरिक्त चेक-इन विज़िट शामिल</li>
-          </ul>
-          <p class="plan-note">मासिक भुगतान से बेहतर वैल्यू।</p>
-        </div>
         <div class="plan-card plan-highlight">
           <p class="plan-badge">बेस्ट वैल्यू</p>
           <h3>कोर केयर</h3>
-          <p class="plan-sub">12 महीने</p>
+          <p class="plan-sub">पूरा प्रोग्राम</p>
           <ul>
-            <li>पहले 4 महीने हर महीने ब्लड पैनल, फिर तिमाही</li>
+            <li>टाइट्रेशन के दौरान हर महीने ब्लड पैनल, फिर डॉक्टर की सलाह अनुसार</li>
             <li>टाइट्रेशन के दौरान साप्ताहिक विज़िट, फिर मेंटेनेंस चरण में लगातार चेक-इन</li>
-            <li>12 महीने की GLP-1 दवा — पूरा टाइट्रेशन, साथ ही वज़न बनाए रखने के लिए मेंटेनेंस डोज़</li>
-            <li>व्हाट्सएप वॉल्ट: कोचिंग, एक्सरसाइज़ व प्रोग्रेस ट्रैकिंग</li>
-            <li>जब भी ज़रूरत हो, असीमित खुराक-समायोजन विज़िट</li>
-            <li>आपकी केयर टीम से प्राथमिकता वाला व्हाट्सएप जवाब</li>
+            <li>GLP-1 दवा — पूरा टाइट्रेशन, साथ ही वज़न बनाए रखने के लिए मेंटेनेंस डोज़</li>
+            <li>व्हाट्सएप कोर केयर चैनल: कोचिंग, एक्सरसाइज़ व प्रोग्रेस ट्रैकिंग</li>
+            <li>जब भी ज़रूरत हो असीमित खुराक-समायोजन विज़िट, साथ ही आपकी केयर टीम से प्राथमिकता वाला व्हाट्सएप जवाब</li>
+            <li>डॉक्टर की सलाह अनुसार 1, 4 या 12 महीनों के लिए कस्टमाइज़ किया जा सकता है</li>
           </ul>
-          <p class="plan-note">यही एकमात्र प्लान है जो मेंटेनेंस चरण में भी आपके साथ रहता है।</p>
+          <p class="plan-note">यही प्लान है जो मेंटेनेंस चरण में भी आपके साथ रहता है।</p>
         </div>
       </div>
 
-    <p class="disclaimer" style="margin-top:24px;">डॉक्टर के कंसल्टेशन के बाद और जानें।</p>
+    <p class="disclaimer" style="margin-top:24px;">डॉक्टर के कंसल्टेशन में कीमत बताई जाएगी।</p>
   </div>
 </section>
 <section class="section text-center" style="background:var(--card); border-top:1px solid var(--border);">
@@ -126,7 +104,7 @@
     <h2>अभी तय नहीं कर पा रहे?</h2>
     <p class="section-sub">बेसिक प्लान से शुरू करें — कोई प्रतिबद्धता नहीं, बस एक ईमानदार व्यक्तिगत जांच।</p>
     <div class="hero-ctas">
-      <a href="https://wa.me/92220660848?text=Hi%20OBO%20Health%2C%20I%27d%20like%20to%20know%20more%20about%20your%20plans." target="_blank" rel="noopener" class="btn btn-accent">व्हाट्सएप पर पूछें</a>
+      <a href="https://wa.me/919220660898?text=Hi%20OBO%20Health%2C%20I%27d%20like%20to%20know%20more%20about%20your%20plans." target="_blank" rel="noopener" class="btn btn-accent">व्हाट्सएप पर पूछें</a>
       <a href="/hi/compare/" class="btn btn-outline">ऐप्स से तुलना करें</a>
     </div>
   </div>
@@ -146,11 +124,9 @@
         <h4>एक्सप्लोर करें</h4>
         <ul class="footer-links">
           <li><a href="/hi/how-it-works/">कैसे काम करता है</a></li>
-          <li><a href="/hi/glp-1/">GLP-1 को समझें</a></li>
           <li><a href="/hi/protein-and-mobility/">प्रोटीन व सक्रियता</a></li>
           <li><a href="/hi/pricing/">मूल्य</a></li>
           <li><a href="/hi/compare/">ऐप्स बनाम OBO क्लिनिक</a></li>
-          <li><a href="/hi/bmi-calculator/">BMI कैलकुलेटर</a></li>
           <li><a href="/hi/faq/">सामान्य प्रश्न</a></li>
           <li><a href="/hi/contact/">संपर्क करें</a></li>
         </ul>
@@ -158,8 +134,8 @@
       <div>
         <h4>संपर्क</h4>
         <ul class="footer-links">
-          <li><a href="https://wa.me/92220660848" target="_blank" rel="noopener">व्हाट्सएप करें</a></li>
-          <li><a href="tel:92220660848">कॉल करें 92220660848</a></li>
+          <li><a href="https://wa.me/919220660898" target="_blank" rel="noopener">व्हाट्सएप करें</a></li>
+          <li><a href="tel:+919220660898">कॉल करें +91 92206 60898</a></li>
           <li>जेएम रोड, पुणे</li>
           <li><a href="/hi/contact/">पता और समय</a></li>
         </ul>
@@ -173,8 +149,8 @@
 </footer>
 
 <div class="sticky-cta">
-  <a href="tel:92220660848" class="sticky-call"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.57.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.57 1 1 0 01-.25 1.01l-2.2 2.21z"/></svg>अभी कॉल करें</a>
-  <a href="https://wa.me/92220660848" target="_blank" rel="noopener" class="sticky-wa"><svg  viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.697 4.61 1.902 6.49L4 29l7.694-1.87A11.93 11.93 0 0 0 16.001 27C22.629 27 28 21.627 28 15S22.629 3 16.001 3zm0 21.818a9.77 9.77 0 0 1-4.98-1.362l-.357-.212-4.566 1.11 1.223-4.451-.233-.364A9.77 9.77 0 0 1 5.818 15c0-5.613 4.57-10.182 10.183-10.182S26.184 9.387 26.184 15 21.614 24.818 16.001 24.818zm5.593-7.632c-.306-.153-1.81-.892-2.09-.994-.28-.102-.484-.153-.688.153-.204.306-.79.994-.968 1.198-.178.204-.357.23-.663.077-.306-.153-1.292-.476-2.462-1.518-.91-.812-1.525-1.815-1.704-2.121-.178-.306-.019-.471.134-.623.137-.137.306-.357.459-.535.153-.178.204-.306.306-.51.102-.204.051-.383-.026-.535-.077-.153-.688-1.659-.943-2.272-.248-.596-.5-.515-.688-.524-.178-.009-.382-.011-.586-.011-.204 0-.535.077-.815.383-.28.306-1.069 1.045-1.069 2.55 0 1.505 1.094 2.96 1.246 3.164.153.204 2.153 3.287 5.217 4.608.729.315 1.297.503 1.74.643.731.232 1.396.199 1.922.121.586-.088 1.81-.74 2.065-1.454.255-.714.255-1.326.178-1.454-.076-.128-.28-.204-.586-.357z"/></svg>व्हाट्सएप करें</a>
+  <a href="tel:+919220660898" class="sticky-call"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.57.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.57 1 1 0 01-.25 1.01l-2.2 2.21z"/></svg>अभी कॉल करें</a>
+  <a href="https://wa.me/919220660898" target="_blank" rel="noopener" class="sticky-wa"><svg  viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.697 4.61 1.902 6.49L4 29l7.694-1.87A11.93 11.93 0 0 0 16.001 27C22.629 27 28 21.627 28 15S22.629 3 16.001 3zm0 21.818a9.77 9.77 0 0 1-4.98-1.362l-.357-.212-4.566 1.11 1.223-4.451-.233-.364A9.77 9.77 0 0 1 5.818 15c0-5.613 4.57-10.182 10.183-10.182S26.184 9.387 26.184 15 21.614 24.818 16.001 24.818zm5.593-7.632c-.306-.153-1.81-.892-2.09-.994-.28-.102-.484-.153-.688.153-.204.306-.79.994-.968 1.198-.178.204-.357.23-.663.077-.306-.153-1.292-.476-2.462-1.518-.91-.812-1.525-1.815-1.704-2.121-.178-.306-.019-.471.134-.623.137-.137.306-.357.459-.535.153-.178.204-.306.306-.51.102-.204.051-.383-.026-.535-.077-.153-.688-1.659-.943-2.272-.248-.596-.5-.515-.688-.524-.178-.009-.382-.011-.586-.011-.204 0-.535.077-.815.383-.28.306-1.069 1.045-1.069 2.55 0 1.505 1.094 2.96 1.246 3.164.153.204 2.153 3.287 5.217 4.608.729.315 1.297.503 1.74.643.731.232 1.396.199 1.922.121.586-.088 1.81-.74 2.065-1.454.255-.714.255-1.326.178-1.454-.076-.128-.28-.204-.586-.357z"/></svg>व्हाट्सएप करें</a>
 </div>
 
 <script src="/js/main.js"></script>

@@ -105,6 +105,7 @@ a { color: var(--sky-dark); }
   line-height: 1;
   text-decoration: none;
   flex-shrink: 0;
+  order: 1;
 }
 .logo-obo {
   font-family: var(--font-display);
@@ -128,6 +129,7 @@ a { color: var(--sky-dark); }
   align-items: center;
   gap: 4px;
   flex-wrap: wrap;
+  order: 2;
 }
 .main-nav a {
   color: var(--ink);
@@ -157,13 +159,20 @@ a { color: var(--sky-dark); }
 .main-nav .has-dropdown:focus-within .dropdown-panel { display: block; }
 .dropdown-panel a { display: block; padding: 9px 12px; font-weight: 500; }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  order: 3;
+}
+
 .lang-switch {
   display: flex;
   align-items: center;
   gap: 2px;
   font-size: 0.78rem;
   font-weight: 700;
-  margin-left: 8px;
 }
 .lang-switch a {
   color: var(--muted);
@@ -270,13 +279,6 @@ a { color: var(--sky-dark); }
 .hero-benefit .icon svg { display: block; width: 100%; height: 100%; }
 .hero-benefit span:last-child { font-size: 0.82rem; font-weight: 600; color: var(--ink); line-height: 1.25; }
 
-.illustration {
-  max-width: 220px;
-  margin: 32px auto 0;
-}
-.illustration svg { display: block; width: 100%; height: auto; }
-.illustration-sm { max-width: 160px; margin: 0 auto 20px; }
-
 .btn {
   display: inline-flex;
   align-items: center;
@@ -302,7 +304,6 @@ a { color: var(--sky-dark); }
 .btn-sm { padding: 9px 18px; font-size: 0.85rem; }
 .btn-whatsapp { background: var(--whatsapp); color: #fff; }
 .btn-whatsapp:hover { background: var(--whatsapp-dark); }
-.wa-icon { width: 20px; height: 20px; flex-shrink: 0; }
 
 /* Feature grid (trust / why OBO) */
 .features-section, .section { padding: 48px 0; }
@@ -323,14 +324,7 @@ a { color: var(--sky-dark); }
   border-radius: var(--radius);
   padding: 22px 24px;
 }
-.feature .dot {
-  display: inline-block;
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: var(--sky);
-  margin-bottom: 12px;
-}
-.feature h3 { margin-bottom: 6px; font-size: 1.08rem; }
+.feature h3 { margin: 0 0 6px; font-size: 1.08rem; }
 .feature p { margin: 0; font-size: 0.94rem; }
 
 /* Doctor card */
@@ -461,6 +455,7 @@ a { color: var(--sky-dark); }
   grid-template-columns: repeat(4, 1fr);
   gap: 18px;
 }
+.pricing-grid-2 { grid-template-columns: repeat(2, 1fr); max-width: 720px; margin: 0 auto; }
 .plan-card {
   background: var(--card);
   border: 1px solid var(--border);
@@ -502,97 +497,7 @@ a { color: var(--sky-dark); }
   margin: -6px auto 30px;
 }
 
-/* BMI section (reused on home + dedicated page) */
-.bmi-section { padding: 24px 0 56px; }
-.bmi-section h2 { text-align: center; }
-
-.bmi-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 28px;
-  max-width: 480px;
-  margin: 0 auto;
-  box-shadow: 0 1px 3px rgba(16, 32, 30, 0.04);
-}
-
-.field-group { margin-bottom: 22px; }
-.field-group label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 10px;
-  font-size: 0.95rem;
-}
-
-.unit-toggle {
-  display: inline-flex;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 3px;
-  margin-bottom: 14px;
-}
-.unit-btn {
-  border: none;
-  background: transparent;
-  padding: 6px 16px;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--muted);
-  cursor: pointer;
-}
-.unit-btn.active { background: var(--sky); color: #fff; }
-
-.unit-fields { display: flex; align-items: center; gap: 10px; }
-.unit-fields input {
-  flex: 1;
-  padding: 12px 14px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  font-size: 1rem;
-  min-width: 0;
-}
-.unit-fields input:focus {
-  outline: none;
-  border-color: var(--sky);
-  box-shadow: 0 0 0 3px var(--sky-tint);
-}
-.unit-label { color: var(--muted); font-size: 0.9rem; font-weight: 600; flex-shrink: 0; }
-
-.error { color: #b91c1c; font-size: 0.9rem; margin-top: 12px; margin-bottom: 0; }
-
-.bmi-result {
-  max-width: 480px;
-  margin: 24px auto 0;
-  background: var(--sky-tint);
-  border-radius: var(--radius);
-  padding: 24px 28px;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-.result-number { flex-shrink: 0; text-align: center; color: var(--sky-dark); }
-.result-number span { display: block; font-size: 2.4rem; font-weight: 800; line-height: 1; font-family: var(--font-display); }
-.result-number small { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; }
-.result-detail .category { margin: 0 0 4px; font-weight: 700; color: var(--ink); font-size: 1.1rem; }
-.result-detail .message { margin: 0; font-size: 0.92rem; }
-
-.bmi-cta {
-  max-width: 480px;
-  margin: 20px auto 0;
-  background: var(--warn-bg);
-  border: 1px solid var(--warn-border);
-  border-radius: var(--radius);
-  padding: 22px 24px;
-  text-align: center;
-}
-.bmi-cta p { margin: 0 0 16px; color: var(--ink); }
-
 .disclaimer { max-width: 620px; margin: 28px auto 0; font-size: 0.8rem; text-align: center; color: var(--muted); }
-.bmi-scale { max-width: 480px; margin: 40px auto 0; font-size: 0.82rem; }
-.bmi-scale table { width: 100%; border-collapse: collapse; }
-.bmi-scale th, .bmi-scale td { padding: 8px 10px; border-bottom: 1px solid var(--border); text-align: left; }
 
 /* Condition pages */
 .condition-grid {
@@ -1030,6 +935,58 @@ a { color: var(--sky-dark); }
   .features-grid, .testimonial-grid, .condition-grid, .pricing-grid, .footer-grid, .icon-grid, .icon-grid-3, .lifestyle-grid { grid-template-columns: 1fr; }
   .lifestyle-card { min-height: 220px; }
   .doctor-card { flex-direction: column; text-align: center; }
-  .bmi-result { flex-direction: column; text-align: center; }
   h1 { font-size: 2rem; }
+  .callback-form-row { grid-template-columns: 1fr; }
 }
+
+/* Physician strip (homepage) */
+.physician-strip { padding: 20px 0 8px; }
+.doctor-card-compact { max-width: 620px; }
+.doctor-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--sky-dark);
+}
+.doctor-link:hover { text-decoration: underline; }
+
+/* Callback form */
+.callback-form {
+  max-width: 440px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+.callback-form-title { font-weight: 700; font-size: 0.92rem; margin: 0 0 10px; color: var(--ink); }
+.callback-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.callback-form-field label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.callback-form-field input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  background: var(--card);
+  color: var(--ink);
+}
+.callback-form-field input:focus {
+  outline: none;
+  border-color: var(--sky);
+}
+.callback-form-hint { font-size: 0.78rem; color: var(--muted); margin: 10px 0 0; }
+.callback-form-error { color: #b91c1c; font-size: 0.85rem; margin: 8px 0 0; }

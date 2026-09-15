@@ -89,4 +89,30 @@
 
     updateDots();
   });
+
+  var WHATSAPP_NUMBER = '919220660898';
+
+  document.querySelectorAll('[data-callback-form]').forEach(function (form) {
+    var errorEl = form.querySelector('.callback-form-error');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var nameInput = form.querySelector('input[name="name"]');
+      var phoneInput = form.querySelector('input[name="phone"]');
+      var name = nameInput.value.trim();
+      var phone = phoneInput.value.trim();
+      var digits = phone.replace(/\D/g, '');
+
+      if (!name || digits.length < 10) {
+        if (errorEl) errorEl.classList.remove('hidden');
+        return;
+      }
+      if (errorEl) errorEl.classList.add('hidden');
+
+      var text = encodeURIComponent(
+        'Hi OBO Health, my name is ' + name + ' and my phone number is ' + phone + '. Please call me back to schedule a consultation.'
+      );
+      window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + text, '_blank', 'noopener');
+      form.reset();
+    });
+  });
 })();
