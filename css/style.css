@@ -229,39 +229,61 @@ a { color: var(--sky-dark); }
   position: relative;
   padding: 0;
   overflow: hidden;
-  background: linear-gradient(180deg, #eaf3fb 0%, var(--bg) 100%);
+  background: linear-gradient(160deg, #fdf1ea 0%, var(--bg) 55%);
 }
-@media (min-width: 861px) {
-  .hero {
-    background-image: url('/images/happy_ppl/hero-lake-view.webp');
-    background-size: cover;
-    background-position: center;
-  }
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -80px; left: -80px;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: var(--coral-tint);
+  opacity: 0.7;
 }
 .hero-flex {
+  position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   max-width: 1400px;
   margin: 0 auto;
   min-height: 0;
 }
-@media (min-width: 861px) { .hero-flex { min-height: 620px; } }
+@media (min-width: 861px) {
+  .hero-flex { flex-direction: row; gap: 32px; min-height: 0; }
+  .hero-content { flex: 1 1 50%; }
+  .hero-photo { flex: 1 1 50%; }
+}
 .hero-content {
+  position: relative;
   padding: 44px 28px;
   max-width: 560px;
   text-align: left;
 }
+.hero-photo {
+  position: relative;
+  width: 100%;
+  padding: 0 28px 32px;
+}
+@media (min-width: 861px) { .hero-photo { padding: 44px 28px 44px 0; } }
+.hero-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+  box-shadow: 0 20px 40px -16px rgba(11, 74, 99, 0.28);
+}
 .hero h1 {
-  font-size: 2.8rem;
+  font-size: 2.5rem;
   margin: 10px 0 14px;
 }
 .hero-h1-accent { display: block; color: var(--sky); }
 .hero-sub {
   max-width: 480px;
-  margin: 0 0 22px;
+  margin: 0 0 14px;
   font-size: 1.08rem;
 }
-.hero-locality { margin: 18px 0 0; }
+.hero-locality { margin: 0 0 22px; }
 .hero-ctas {
   display: flex;
   gap: 12px;
@@ -282,11 +304,21 @@ a { color: var(--sky-dark); }
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: 10px;
   flex: 1 1 100px;
 }
-.hero-benefit .icon { width: 26px; height: 26px; color: var(--navy); }
-.hero-benefit .icon svg { display: block; width: 100%; height: 100%; }
+.hero-benefit .icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  color: var(--sky-dark);
+  background: var(--sky-tint);
+}
+.hero-benefit .icon svg { display: block; width: 22px; height: 22px; }
+.hero-benefit .icon.icon-coral { color: var(--coral); background: var(--coral-tint); }
+.hero-benefit .icon.icon-green { color: var(--green); background: var(--green-tint); }
 .hero-benefit span:last-child { font-size: 0.82rem; font-weight: 600; color: var(--ink); line-height: 1.25; }
 
 .btn {
