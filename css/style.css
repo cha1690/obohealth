@@ -229,61 +229,63 @@ a { color: var(--sky-dark); }
   position: relative;
   padding: 0;
   overflow: hidden;
-  background: linear-gradient(160deg, #fdf1ea 0%, var(--bg) 55%);
+  min-height: 640px;
+  display: flex;
+  align-items: center;
+  background: var(--navy-dark);
 }
-.hero::before {
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hero-media::after {
   content: "";
   position: absolute;
-  top: -80px; left: -80px;
-  width: 260px; height: 260px;
-  border-radius: 50%;
-  background: var(--coral-tint);
-  opacity: 0.7;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6, 20, 26, 0.82) 0%, rgba(6, 20, 26, 0.72) 45%, rgba(6, 20, 26, 0.55) 100%);
+}
+@media (min-width: 861px) {
+  .hero-media::after {
+    background: linear-gradient(100deg, rgba(6, 20, 26, 0.92) 0%, rgba(6, 20, 26, 0.8) 40%, rgba(6, 20, 26, 0.42) 68%, rgba(6, 20, 26, 0.15) 100%);
+  }
 }
 .hero-flex {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  z-index: 1;
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  min-height: 0;
-}
-@media (min-width: 861px) {
-  .hero-flex { flex-direction: row; gap: 32px; min-height: 0; }
-  .hero-content { flex: 1 1 50%; }
-  .hero-photo { flex: 1 1 50%; }
 }
 .hero-content {
   position: relative;
-  padding: 44px 28px;
+  padding: 64px 28px;
   max-width: 560px;
   text-align: left;
-}
-.hero-photo {
-  position: relative;
-  width: 100%;
-  padding: 0 28px 32px;
-}
-@media (min-width: 861px) { .hero-photo { padding: 44px 28px 44px 0; } }
-.hero-photo img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: var(--radius);
-  box-shadow: 0 20px 40px -16px rgba(11, 74, 99, 0.28);
 }
 .hero h1 {
   font-size: 2.5rem;
   margin: 10px 0 14px;
+  color: #fff;
 }
-.hero-h1-accent { display: block; color: var(--sky); }
+.hero-h1-accent { display: block; color: var(--sky-pale); }
 .hero-sub {
   max-width: 480px;
   margin: 0 0 14px;
   font-size: 1.08rem;
+  color: rgba(255, 255, 255, 0.88);
 }
 .hero-locality { margin: 0 0 22px; }
+.hero .eyebrow { color: #fff; background: rgba(255, 255, 255, 0.16); }
+.hero .locality-tag { color: #fff; background: rgba(255, 255, 255, 0.16); }
+.hero .btn-outline { color: #fff; border-color: rgba(255, 255, 255, 0.7); }
+.hero .btn-outline:hover { background: rgba(255, 255, 255, 0.14); }
 .hero-ctas {
   display: flex;
   gap: 12px;
@@ -297,7 +299,7 @@ a { color: var(--sky-dark); }
   gap: 18px;
   margin-top: 30px;
   padding-top: 24px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
   flex-wrap: wrap;
 }
 .hero-benefit {
@@ -313,13 +315,13 @@ a { color: var(--sky-dark); }
   justify-content: center;
   width: 44px; height: 44px;
   border-radius: 50%;
-  color: var(--sky-dark);
-  background: var(--sky-tint);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.16);
 }
 .hero-benefit .icon svg { display: block; width: 22px; height: 22px; }
-.hero-benefit .icon.icon-coral { color: var(--coral); background: var(--coral-tint); }
-.hero-benefit .icon.icon-green { color: var(--green); background: var(--green-tint); }
-.hero-benefit span:last-child { font-size: 0.82rem; font-weight: 600; color: var(--ink); line-height: 1.25; }
+.hero-benefit .icon.icon-coral { color: #fff; background: rgba(255, 255, 255, 0.16); }
+.hero-benefit .icon.icon-green { color: #fff; background: rgba(255, 255, 255, 0.16); }
+.hero-benefit span:last-child { font-size: 0.82rem; font-weight: 600; color: #fff; line-height: 1.25; }
 
 .btn {
   display: inline-flex;
@@ -792,7 +794,7 @@ a { color: var(--sky-dark); }
   font-weight: 600;
 }
 
-/* Meet the Team */
+/* Meet the Team — flip cards */
 .team-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -800,20 +802,90 @@ a { color: var(--sky-dark); }
   margin-top: 32px;
 }
 .team-card {
+  perspective: 1600px;
+  cursor: pointer;
+}
+.team-card:focus-visible .team-card-inner { outline: 2px solid var(--sky); outline-offset: 3px; }
+.team-card-inner {
+  position: relative;
+  height: 540px;
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.team-card.flipped .team-card-inner { transform: rotateY(180deg); }
+.team-card-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 28px 24px;
-  text-align: center;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
-.team-card .doctor-photo { margin: 0 auto 16px; }
-.team-card .cred-list { justify-content: center; }
-.team-card .team-bio {
-  margin: 16px 0 0;
-  font-size: 0.92rem;
-  color: var(--ink);
+.team-card-front .team-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.team-front-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 56px 20px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(to top, rgba(6, 20, 26, 0.88) 0%, rgba(6, 20, 26, 0.72) 45%, rgba(6, 20, 26, 0) 100%);
+}
+.team-front-info .doctor-name { color: #fff; }
+.team-front-info .doctor-cred { color: var(--sky-pale); }
+.team-front-info .cred-list { justify-content: center; }
+.team-front-info .cred-list .cred {
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--navy);
+}
+.team-front-info .cred-list .cred-outline {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.75);
+  color: #fff;
+}
+.team-front-info .flip-hint { color: #fff; }
+.team-card-back {
+  transform: rotateY(180deg);
+  padding: 28px 24px;
   text-align: left;
-  line-height: 1.6;
+  justify-content: center;
+  overflow-y: auto;
+}
+.team-card-back .doctor-name { text-align: center; }
+.team-card-back .team-bio {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  color: var(--ink);
+  line-height: 1.65;
+}
+.team-card-back .team-bio + .team-bio { margin-top: 10px; }
+.flip-hint {
+  display: block;
+  margin-top: auto;
+  padding-top: 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--sky-dark);
+}
+.team-card-back .flip-hint { text-align: center; }
+
+@media (max-width: 640px) {
+  .team-grid { grid-template-columns: 1fr; }
+  .team-card-inner { height: 480px; }
 }
 
 /* Quote block (founder story) */
