@@ -502,6 +502,17 @@ a { color: var(--sky-dark); }
 .icon-card h3 { font-size: 1rem; margin-bottom: 6px; }
 .icon-card p { margin: 0; font-size: 0.9rem; }
 
+.icon-grid-band {
+  background: linear-gradient(135deg, var(--green-tint) 0%, var(--coral-tint) 100%);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.icon-grid-band .section-title { color: var(--green); }
+.icon-grid-band .icon-card {
+  background: #fff;
+  box-shadow: 0 4px 14px -6px rgba(11, 74, 99, 0.14);
+}
+
 .check-list { list-style: none; padding: 0; margin: 18px 0; }
 .check-list li {
   display: flex;
@@ -950,7 +961,7 @@ a { color: var(--sky-dark); }
   font-size: 2.1rem;
   font-weight: 800;
   flex-shrink: 0;
-  color: var(--sky-pale);
+  color: var(--coral);
   line-height: 1;
 }
 .stat-callout p { margin: 0; font-size: 0.92rem; line-height: 1.5; color: #fff; }
