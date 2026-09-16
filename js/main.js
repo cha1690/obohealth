@@ -36,6 +36,56 @@
     });
   });
 
+  var stepList = document.querySelector('[data-step-scroll]');
+  if (stepList) {
+    var stepItems = Array.prototype.slice.call(stepList.querySelectorAll('li'));
+    var stepTrack = document.createElement('div');
+    stepTrack.className = 'step-track';
+    var stepFill = document.createElement('div');
+    stepFill.className = 'step-progress-fill';
+    stepList.insertBefore(stepFill, stepList.firstChild);
+    stepList.insertBefore(stepTrack, stepList.firstChild);
+
+    var stepStart = 0, stepEnd = 0;
+
+    var layoutSteps = function () {
+      if (!stepItems.length) return;
+      stepStart = stepItems[0].offsetTop + 20;
+      stepEnd = stepItems[stepItems.length - 1].offsetTop + 20;
+      stepTrack.style.top = stepStart + 'px';
+      stepTrack.style.height = Math.max(0, stepEnd - stepStart) + 'px';
+      stepFill.style.top = stepStart + 'px';
+    };
+
+    var updateSteps = function () {
+      var triggerY = window.innerHeight * 0.55;
+      var listTop = stepList.getBoundingClientRect().top;
+      var totalTrack = stepEnd - stepStart;
+      var progress = totalTrack > 0
+        ? Math.max(0, Math.min(1, (triggerY - (listTop + stepStart)) / totalTrack))
+        : 0;
+      stepFill.style.height = (progress * totalTrack) + 'px';
+
+      stepItems.forEach(function (li) {
+        var circleY = listTop + li.offsetTop + 20;
+        li.classList.toggle('is-active', circleY <= triggerY);
+      });
+    };
+
+    var stepTicking = false;
+    var onStepScroll = function () {
+      if (!stepTicking) {
+        window.requestAnimationFrame(function () { updateSteps(); stepTicking = false; });
+        stepTicking = true;
+      }
+    };
+
+    layoutSteps();
+    updateSteps();
+    window.addEventListener('scroll', onStepScroll, { passive: true });
+    window.addEventListener('resize', function () { layoutSteps(); updateSteps(); });
+  }
+
   document.querySelectorAll('[data-flip-card]').forEach(function (card) {
     function toggle() {
       var flipped = card.classList.toggle('flipped');
