@@ -504,13 +504,16 @@ a { color: var(--sky-dark); }
 .testimonial-metric {
   display: inline-block;
   align-self: flex-start;
+  font-family: var(--font-display);
   font-weight: 800;
-  color: var(--coral);
-  background: var(--coral-tint);
-  padding: 4px 12px;
+  color: #fff;
+  background: linear-gradient(135deg, #4fb385 0%, var(--green) 55%, #2c7a52 100%);
+  padding: 9px 20px;
   border-radius: 999px;
-  font-size: 0.8rem;
-  margin-bottom: 12px;
+  font-size: 1.15rem;
+  letter-spacing: 0.01em;
+  margin-bottom: 14px;
+  box-shadow: 0 6px 16px -4px rgba(47, 122, 82, 0.55);
 }
 .testimonial-quote { color: var(--muted); margin: 0; font-size: 0.9rem; line-height: 1.6; }
 .testimonial-name { font-weight: 700; color: var(--ink); font-size: 0.88rem; margin: 0; }
