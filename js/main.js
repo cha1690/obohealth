@@ -156,6 +156,13 @@
 
   var WHATSAPP_NUMBER = '919220660898';
 
+  // Apps Script Web App URL from Deploy > New deployment > Web app (ends in /exec).
+  var CALLBACK_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwzt7HNHIlyP-0jrplvNWqvzKi1XDRfKaa-REyYufUMeM9-J51bTfaYDuewc1r7LpFs4g/exec';
+  // Must match the FORM_SECRET script property in Apps Script. Not a real secret
+  // (visible in this public file) — just a filter against casual/automated abuse.
+  var CALLBACK_FORM_SECRET = '-PC8NWZCdBjVhV64VFvaE3TdR1k7-fj7';
+  var CALLBACK_LANGUAGE_MAP = { en: 'English', hi: 'Hindi', mr: 'Marathi' };
+
   document.querySelectorAll('[data-callback-form]').forEach(function (form) {
     var errorEl = form.querySelector('.callback-form-error');
     form.addEventListener('submit', function (e) {
@@ -171,6 +178,24 @@
         return;
       }
       if (errorEl) errorEl.classList.add('hidden');
+
+      // Best-effort: log the lead to the Sheet and trigger the automated WhatsApp
+      // template message. Uses mode: 'no-cors' with a plain-text body so the
+      // browser skips a CORS preflight; failures here never block the flow below.
+      try {
+        fetch(CALLBACK_ENDPOINT, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: JSON.stringify({
+            name: name,
+            phone: phone,
+            language: CALLBACK_LANGUAGE_MAP[document.documentElement.lang] || 'English',
+            secret: CALLBACK_FORM_SECRET
+          })
+        }).catch(function () {});
+      } catch (err) {
+        // ignore — the wa.me fallback below still works
+      }
 
       var text = encodeURIComponent(
         'Hi OBO Health, my name is ' + name + ' and my phone number is ' + phone + '. Please call me back to schedule a consultation.'
