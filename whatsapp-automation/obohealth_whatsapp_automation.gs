@@ -68,10 +68,11 @@ var BOOKING_COL = {
   CREATED_AT: 7
 };
 
-// Business hours for the booking page — Mon–Fri, 30-minute slots.
-var BUSINESS_START_MINUTES = 10 * 60 + 30; // 10:30
-var BUSINESS_END_MINUTES = 15 * 60 + 30;   // 15:30 (last slot starts 15:00)
+// Business hours for the booking page — Mon–Wed, 12:00 PM–4:00 PM, 30-minute slots.
+var BUSINESS_START_MINUTES = 12 * 60;      // 12:00
+var BUSINESS_END_MINUTES = 16 * 60;        // 16:00 (last slot starts 15:30)
 var SLOT_LENGTH_MINUTES = 30;
+var OPEN_WEEKDAYS = [1, 2, 3]; // Mon, Tue, Wed (0 = Sunday)
 
 function onOpen() {
   SpreadsheetApp.getUi()
@@ -203,7 +204,7 @@ function getAvailableSlots(dateStr) {
   if (!date) return [];
 
   var day = date.getDay(); // 0 = Sunday
-  if (day === 0 || day === 6) return []; // weekends closed
+  if (OPEN_WEEKDAYS.indexOf(day) === -1) return []; // closed that day
 
   var calendar = CalendarApp.getDefaultCalendar();
   var now = new Date();
@@ -246,8 +247,17 @@ function handleBookingSubmission(data) {
   var date = parseDateOnly(dateStr);
   if (!date) return { success: false, error: 'Invalid date' };
 
+  if (OPEN_WEEKDAYS.indexOf(date.getDay()) === -1) {
+    return { success: false, error: 'We are closed that day' };
+  }
+
   var hh = Number(timeStr.substring(0, 2));
   var mm = Number(timeStr.substring(3, 5));
+  var minutesOfDay = hh * 60 + mm;
+  if (minutesOfDay < BUSINESS_START_MINUTES || minutesOfDay >= BUSINESS_END_MINUTES || minutesOfDay % SLOT_LENGTH_MINUTES !== 0) {
+    return { success: false, error: 'That time is outside business hours' };
+  }
+
   var start = new Date(date.getTime());
   start.setHours(hh, mm, 0, 0);
   var end = new Date(start.getTime() + SLOT_LENGTH_MINUTES * 60 * 1000);
