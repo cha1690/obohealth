@@ -20,6 +20,12 @@
  *    deployment > type "Web app" > Execute as "Me" > Who has access "Anyone".
  *    Copy the resulting URL (ends in /exec) into CALLBACK_ENDPOINT in js/main.js,
  *    and copy the same FORM_SECRET value into CALLBACK_FORM_SECRET there too.
+ *
+ * Booking page (book/index.html) uses the same deployment and secret. It reads
+ * open slots via GET ?action=slots&date=YYYY-MM-DD and books via POST with
+ * action: "book". Bookings are logged to a second tab named "Bookings" and
+ * create a real event on this account's default Google Calendar (checked for
+ * conflicts before booking, so slots can't double-book).
  */
 
 var COL = {
@@ -43,6 +49,29 @@ var TEMPLATES = {
   'Marathi': { name: 'clinic_intro_mr', lang: 'mr' }
 };
 var DEFAULT_LANGUAGE = 'English';
+
+/** Booking confirmation templates — separate from the intro templates above. */
+var BOOKING_TEMPLATES = {
+  'English': { name: 'booking_held', lang: 'en' },
+  'Hindi': { name: 'booking_held_hi', lang: 'hi' },
+  'Marathi': { name: 'booking_held_mr', lang: 'mr' }
+};
+
+var BOOKING_SHEET_NAME = 'Bookings';
+var BOOKING_COL = {
+  PHONE: 1,
+  NAME: 2,
+  DATE: 3,
+  TIME: 4,
+  STATUS: 5,
+  LANGUAGE: 6,
+  CREATED_AT: 7
+};
+
+// Business hours for the booking page — Mon–Fri, 30-minute slots.
+var BUSINESS_START_MINUTES = 10 * 60 + 30; // 10:30
+var BUSINESS_END_MINUTES = 15 * 60 + 30;   // 15:30 (last slot starts 15:00)
+var SLOT_LENGTH_MINUTES = 30;
 
 function onOpen() {
   SpreadsheetApp.getUi()
@@ -123,7 +152,7 @@ function processRow(sheet, row) {
     return;
   }
 
-  var result = sendTemplateMessage(normalized, name, template.name, template.lang);
+  var result = sendTemplateMessage(normalized, template.name, template.lang, [name || 'there']);
 
   sheet.getRange(row, COL.LAST_ATTEMPT).setValue(now);
   if (result.success) {
@@ -137,19 +166,139 @@ function processRow(sheet, row) {
 
 /**
  * Web app entry point — receives leads from the website's "Request a callback"
- * form. Deploy this project as a Web app (see setup notes at the top) to get
- * the URL that js/main.js posts to.
+ * form, and booking requests from book/index.html. Deploy this project as a
+ * Web app (see setup notes at the top) to get the URL both pages post to.
  */
 function doPost(e) {
   var result;
   try {
     var data = JSON.parse(e.postData.contents);
-    result = handleFormSubmission(data);
+    result = data.action === 'book' ? handleBookingSubmission(data) : handleFormSubmission(data);
   } catch (err) {
     result = { success: false, error: err.message };
   }
   return ContentService.createTextOutput(JSON.stringify(result))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+/** Web app GET entry point — used by book/index.html to fetch open slots for a date. */
+function doGet(e) {
+  var result;
+  try {
+    if (e.parameter.action === 'slots' && e.parameter.date) {
+      result = { success: true, slots: getAvailableSlots(e.parameter.date) };
+    } else {
+      result = { success: false, error: 'Unknown request' };
+    }
+  } catch (err) {
+    result = { success: false, error: err.message };
+  }
+  return ContentService.createTextOutput(JSON.stringify(result))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+/** Returns available "HH:MM" slot strings for a given YYYY-MM-DD date. */
+function getAvailableSlots(dateStr) {
+  var date = parseDateOnly(dateStr);
+  if (!date) return [];
+
+  var day = date.getDay(); // 0 = Sunday
+  if (day === 0 || day === 6) return []; // weekends closed
+
+  var calendar = CalendarApp.getDefaultCalendar();
+  var now = new Date();
+  var slots = [];
+
+  for (var minutes = BUSINESS_START_MINUTES; minutes < BUSINESS_END_MINUTES; minutes += SLOT_LENGTH_MINUTES) {
+    var start = new Date(date.getTime());
+    start.setHours(0, minutes, 0, 0);
+    var end = new Date(start.getTime() + SLOT_LENGTH_MINUTES * 60 * 1000);
+
+    if (start <= now) continue; // don't offer past slots, including "today, earlier today"
+
+    var conflicts = calendar.getEvents(start, end);
+    if (conflicts.length === 0) {
+      slots.push(formatTime(start));
+    }
+  }
+  return slots;
+}
+
+/** Validates a booking request, creates the Calendar event, logs it, and sends the WhatsApp confirmation. */
+function handleBookingSubmission(data) {
+  var props = PropertiesService.getScriptProperties();
+  var expectedSecret = props.getProperty('FORM_SECRET');
+  if (!expectedSecret || !data || data.secret !== expectedSecret) {
+    return { success: false, error: 'Invalid request' };
+  }
+
+  var name = String(data.name || '').trim();
+  var rawPhone = String(data.phone || '').trim();
+  var dateStr = String(data.date || '').trim();
+  var timeStr = String(data.time || '').trim();
+  var languageLabel = BOOKING_TEMPLATES[data.language] ? data.language : DEFAULT_LANGUAGE;
+  var normalized = normalizePhoneNumber(rawPhone);
+
+  if (!name || !normalized || !dateStr || !/^\d{2}:\d{2}$/.test(timeStr)) {
+    return { success: false, error: 'Missing or invalid booking details' };
+  }
+
+  var date = parseDateOnly(dateStr);
+  if (!date) return { success: false, error: 'Invalid date' };
+
+  var hh = Number(timeStr.substring(0, 2));
+  var mm = Number(timeStr.substring(3, 5));
+  var start = new Date(date.getTime());
+  start.setHours(hh, mm, 0, 0);
+  var end = new Date(start.getTime() + SLOT_LENGTH_MINUTES * 60 * 1000);
+
+  if (start <= new Date()) {
+    return { success: false, error: 'That slot is in the past' };
+  }
+
+  // Re-check for conflicts right before booking, in case two people picked
+  // the same slot at nearly the same time.
+  var calendar = CalendarApp.getDefaultCalendar();
+  if (calendar.getEvents(start, end).length > 0) {
+    return { success: false, error: 'That slot was just taken — please pick another' };
+  }
+
+  calendar.createEvent('OBO Health — ' + name, start, end, {
+    description: 'Booked via website. Phone: ' + rawPhone
+  });
+
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(BOOKING_SHEET_NAME);
+  if (sheet) {
+    var newRow = sheet.getLastRow() + 1;
+    sheet.getRange(newRow, BOOKING_COL.PHONE).setValue(rawPhone);
+    sheet.getRange(newRow, BOOKING_COL.NAME).setValue(name);
+    sheet.getRange(newRow, BOOKING_COL.DATE).setValue(dateStr);
+    sheet.getRange(newRow, BOOKING_COL.TIME).setValue(timeStr);
+    sheet.getRange(newRow, BOOKING_COL.STATUS).setValue('Held');
+    sheet.getRange(newRow, BOOKING_COL.LANGUAGE).setValue(languageLabel);
+    sheet.getRange(newRow, BOOKING_COL.CREATED_AT).setValue(new Date());
+  }
+
+  var template = BOOKING_TEMPLATES[languageLabel];
+  var result = sendTemplateMessage(normalized, template.name, template.lang, [name, formatDate(date), timeStr]);
+
+  return { success: true, messageSent: result.success };
+}
+
+/** Parses a "YYYY-MM-DD" string as a local-timezone date at midnight, or null if invalid. */
+function parseDateOnly(dateStr) {
+  var match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateStr);
+  if (!match) return null;
+  var date = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+  return isNaN(date.getTime()) ? null : date;
+}
+
+function formatTime(date) {
+  return Utilities.formatDate(date, Session.getScriptTimeZone(), 'HH:mm');
+}
+
+function formatDate(date) {
+  return Utilities.formatDate(date, Session.getScriptTimeZone(), 'EEE, d MMM yyyy');
 }
 
 /** Validates and appends a website-submitted lead, then sends immediately. */
@@ -216,8 +365,11 @@ function normalizePhoneNumber(raw) {
   return digits;
 }
 
-/** Sends the approved template message (by name + language) via the WhatsApp Cloud API. */
-function sendTemplateMessage(toNumber, name, templateName, templateLang) {
+/**
+ * Sends an approved template message via the WhatsApp Cloud API.
+ * bodyParams is an ordered array of strings filling the template's {{1}}, {{2}}, ...
+ */
+function sendTemplateMessage(toNumber, templateName, templateLang, bodyParams) {
   var props = PropertiesService.getScriptProperties();
   var token = props.getProperty('WHATSAPP_TOKEN');
   var phoneNumberId = props.getProperty('PHONE_NUMBER_ID');
@@ -237,7 +389,7 @@ function sendTemplateMessage(toNumber, name, templateName, templateLang) {
       components: [
         {
           type: 'body',
-          parameters: [{ type: 'text', text: name || 'there' }]
+          parameters: (bodyParams || []).map(function (p) { return { type: 'text', text: p }; })
         }
       ]
     }

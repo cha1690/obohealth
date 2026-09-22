@@ -872,6 +872,66 @@ a { color: var(--sky-dark); }
 .callback-form-hint { font-size: 0.78rem; color: var(--muted); margin: 10px 0 0; }
 .callback-form-error { color: #b91c1c; font-size: 0.85rem; margin: 8px 0 0; }
 
+/* Booking page */
+.book-card { max-width: 560px; margin: 0 auto; }
+.book-field { margin-bottom: 16px; }
+.book-field label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.book-field input[type="date"],
+.book-field input[type="text"],
+.book-field input[type="tel"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  background: var(--card);
+  color: var(--ink);
+}
+.book-field input:focus { outline: none; border-color: var(--sky); }
+.book-names { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 560px) { .book-names { grid-template-columns: 1fr; } }
+
+.slot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 8px;
+  margin: 10px 0;
+}
+.slot-btn {
+  padding: 9px 8px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  color: var(--ink);
+  font-size: 0.88rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+.slot-btn:hover { border-color: var(--sky); }
+.slot-btn.selected { background: var(--navy); border-color: var(--navy); color: #fff; }
+.slot-empty, .slot-loading { font-size: 0.88rem; color: var(--muted); margin: 10px 0; }
+
+.book-submit { margin-top: 6px; }
+.book-status { font-size: 0.88rem; margin: 12px 0 0; }
+.book-status.error { color: #b91c1c; }
+.book-status.success { color: var(--green); }
+.book-confirmation {
+  background: var(--green-tint);
+  border: 1.5px solid var(--green);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin-top: 16px;
+}
+.book-confirmation h4 { margin: 0 0 6px; color: var(--navy); }
+.book-confirmation p { margin: 0; font-size: 0.92rem; }
+
 /* Credential / badge pills (doctor, founder) */
 .cred-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
 .cred-list .cred {
