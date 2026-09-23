@@ -11,6 +11,34 @@
     });
   }
 
+  document.querySelectorAll('[data-lang-dropdown]').forEach(function (dropdown) {
+    var langToggle = dropdown.querySelector('[data-lang-toggle]');
+    var menu = dropdown.querySelector('[data-lang-menu]');
+    if (!langToggle || !menu) return;
+
+    function closeMenu() {
+      menu.hidden = true;
+      langToggle.setAttribute('aria-expanded', 'false');
+      dropdown.removeAttribute('data-open');
+    }
+    function openMenu() {
+      menu.hidden = false;
+      langToggle.setAttribute('aria-expanded', 'true');
+      dropdown.setAttribute('data-open', 'true');
+    }
+
+    langToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (menu.hidden) openMenu(); else closeMenu();
+    });
+    document.addEventListener('click', function (e) {
+      if (!dropdown.contains(e.target)) closeMenu();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeMenu();
+    });
+  });
+
   document.querySelectorAll('.faq-item').forEach(function (item) {
     var btn = item.querySelector('.faq-question');
     var answer = item.querySelector('.faq-answer');

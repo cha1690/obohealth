@@ -39,7 +39,18 @@
       <span class="logo-obo">OBO</span>
       <span class="logo-health">HEALTH</span>
     </a>
-    <span class="lang-switch"><a href="/book/" class="">EN</a><span>|</span><a href="/hi/book/" class="active">HI</a><span>|</span><a href="/mr/book/" class="">MR</a></span>
+    <div class="lang-dropdown" data-lang-dropdown>
+      <button type="button" class="lang-dropdown-toggle" data-lang-toggle aria-haspopup="true" aria-expanded="false">
+        <svg class="lang-globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.5 4 5.8 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.8-4-9s1.5-6.5 4-9z"/></svg>
+        <span>हिन्दी</span>
+        <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <ul class="lang-dropdown-menu" data-lang-menu hidden>
+        <li><a href="/book/">English</a></li>
+        <li><a href="/hi/book/" class="active">हिन्दी</a></li>
+        <li><a href="/mr/book/">मराठी</a></li>
+      </ul>
+    </div>
   </div>
 </header>
 
