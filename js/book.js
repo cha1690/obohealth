@@ -14,21 +14,24 @@
       noSlots: 'No open slots that day — please try another date.',
       loadError: 'Could not load times. Please call us at +91 92206 60898.',
       booking: 'Booking your slot…',
-      submitError: 'Something went wrong. Please call us at +91 92206 60898.'
+      submitError: 'Something went wrong. Please call us at +91 92206 60898.',
+      messageFailedNote: "We couldn't send the WhatsApp confirmation, but your slot is booked — please call +91 92206 60898 to confirm."
     },
     hi: {
       loading: 'उपलब्ध समय लोड हो रहे हैं…',
       noSlots: 'उस दिन कोई स्लॉट उपलब्ध नहीं है — कृपया कोई और तारीख चुनें।',
       loadError: 'समय लोड नहीं हो सका। कृपया +91 92206 60898 पर कॉल करें।',
       booking: 'आपका स्लॉट बुक किया जा रहा है…',
-      submitError: 'कुछ गड़बड़ हो गई। कृपया +91 92206 60898 पर कॉल करें।'
+      submitError: 'कुछ गड़बड़ हो गई। कृपया +91 92206 60898 पर कॉल करें।',
+      messageFailedNote: 'हम व्हाट्सएप पुष्टि नहीं भेज सके, लेकिन आपका स्लॉट बुक हो गया है — कृपया पुष्टि के लिए +91 92206 60898 पर कॉल करें।'
     },
     mr: {
       loading: 'उपलब्ध वेळा लोड होत आहेत…',
       noSlots: 'त्या दिवशी कोणतेही स्लॉट उपलब्ध नाहीत — कृपया दुसरी तारीख निवडा.',
       loadError: 'वेळा लोड करता आल्या नाहीत. कृपया +91 92206 60898 वर कॉल करा.',
       booking: 'तुमचा स्लॉट बुक होत आहे…',
-      submitError: 'काहीतरी चुकले. कृपया +91 92206 60898 वर कॉल करा.'
+      submitError: 'काहीतरी चुकले. कृपया +91 92206 60898 वर कॉल करा.',
+      messageFailedNote: 'आम्ही व्हॉट्सअ‍ॅप पुष्टी पाठवू शकलो नाही, पण तुमचा स्लॉट बुक झाला आहे — कृपया पुष्टीसाठी +91 92206 60898 वर कॉल करा.'
     }
   };
   var T = STRINGS[document.documentElement.lang] || STRINGS.en;
@@ -40,13 +43,37 @@
   var submitBtn = form.querySelector('[data-book-submit]');
   var statusEl = form.querySelector('[data-book-status]');
   var confirmationEl = document.querySelector('[data-book-confirmation]');
+  var messageWarningEl = document.querySelector('[data-book-message-warning]');
 
   var selectedTime = null;
 
+  function toISODate(d) {
+    var copy = new Date(d.getTime());
+    copy.setMinutes(copy.getMinutes() - copy.getTimezoneOffset());
+    return copy.toISOString().slice(0, 10);
+  }
+
   function todayISO() {
-    var d = new Date();
-    d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
-    return d.toISOString().slice(0, 10);
+    return toISODate(new Date());
+  }
+
+  // Apps Script's "Anyone" web apps can be slow or briefly flaky right after
+  // a deploy. Time out instead of hanging forever, and retry once before
+  // giving up, so a single slow response doesn't strand the visitor.
+  function fetchJson(url, options, timeoutMs) {
+    var controller = new AbortController();
+    var timer = setTimeout(function () { controller.abort(); }, timeoutMs || 20000);
+    var fetchOptions = Object.assign({}, options, { signal: controller.signal });
+
+    return fetch(url, fetchOptions)
+      .then(function (r) { return r.json(); })
+      .finally(function () { clearTimeout(timer); });
+  }
+
+  function fetchJsonWithRetry(url, options) {
+    return fetchJson(url, options).catch(function () {
+      return fetchJson(url, options);
+    });
   }
 
   function setStatus(message, type) {
@@ -90,8 +117,7 @@
     slotGrid.innerHTML = '<p class="slot-loading">' + T.loading + '</p>';
     setStatus('');
 
-    fetch(ENDPOINT + '?action=slots&date=' + encodeURIComponent(dateStr))
-      .then(function (r) { return r.json(); })
+    fetchJsonWithRetry(ENDPOINT + '?action=slots&date=' + encodeURIComponent(dateStr))
       .then(function (data) {
         if (data.success) {
           renderSlots(data.slots || []);
@@ -108,9 +134,31 @@
     slotGrid.innerHTML = '<p class="slot-empty">' + T.loadError + '</p>';
   }
 
+  // On page load, skip straight to the first day that actually has open
+  // slots (e.g. today after hours, or a closed day) rather than defaulting
+  // to today and making the visitor click through empty days themselves.
+  function findFirstAvailableDate(daysAhead) {
+    var dateStr = toISODate(new Date(Date.now() + daysAhead * 24 * 60 * 60 * 1000));
+    dateInput.value = dateStr;
+
+    fetchJsonWithRetry(ENDPOINT + '?action=slots&date=' + encodeURIComponent(dateStr))
+      .then(function (data) {
+        if (data.success && data.slots && data.slots.length) {
+          renderSlots(data.slots);
+        } else if (daysAhead < 14) {
+          findFirstAvailableDate(daysAhead + 1);
+        } else {
+          renderSlots([]);
+        }
+      })
+      .catch(function () {
+        showLoadError();
+      });
+  }
+
   dateInput.min = todayISO();
-  dateInput.value = todayISO();
-  loadSlots(dateInput.value);
+  slotGrid.innerHTML = '<p class="slot-loading">' + T.loading + '</p>';
+  findFirstAvailableDate(0);
 
   dateInput.addEventListener('change', function () {
     if (dateInput.value) loadSlots(dateInput.value);
@@ -125,7 +173,7 @@
     submitBtn.disabled = true;
     setStatus(T.booking);
 
-    fetch(ENDPOINT, {
+    fetchJson(ENDPOINT, {
       method: 'POST',
       body: JSON.stringify({
         action: 'book',
@@ -136,12 +184,15 @@
         language: LANGUAGE,
         secret: FORM_SECRET
       })
-    })
-      .then(function (r) { return r.json(); })
+    }, 15000)
       .then(function (data) {
         if (data.success) {
           form.hidden = true;
           confirmationEl.hidden = false;
+          if (messageWarningEl) {
+            messageWarningEl.textContent = data.messageSent ? '' : T.messageFailedNote;
+            messageWarningEl.hidden = !!data.messageSent;
+          }
         } else {
           setStatus(data.error || T.submitError, 'error');
           submitBtn.disabled = false;

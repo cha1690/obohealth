@@ -45,8 +45,8 @@ var SHEET_NAME = 'Leads';
 /** Maps the sheet's Language column to the matching approved template. */
 var TEMPLATES = {
   'English': { name: 'clinic_intro', lang: 'en' },
-  'Hindi': { name: 'clinic_intro_hi', lang: 'hi' },
-  'Marathi': { name: 'clinic_intro_mr', lang: 'mr' }
+  'Hindi': { name: 'intro_msg_hi', lang: 'hi' },
+  'Marathi': { name: 'intro_msg_mr', lang: 'mr' }
 };
 var DEFAULT_LANGUAGE = 'English';
 
@@ -79,7 +79,41 @@ function onOpen() {
     .createMenu('WhatsApp Automation')
     .addItem('Process all pending rows', 'processAllPending')
     .addItem('Set up trigger (run once)', 'createOnEditTrigger')
+    .addItem('Authorize Calendar access (run once)', 'authorizeCalendarAccess')
     .addToUi();
+}
+
+/**
+ * Run this once from the editor (select it in the function dropdown, click
+ * Run) so Google prompts for Calendar permission. The booking page's slot
+ * lookup and event creation need this — deploying alone doesn't grant it.
+ */
+function authorizeCalendarAccess() {
+  var calendar = CalendarApp.getDefaultCalendar();
+  Logger.log('Calendar access OK: ' + calendar.getName());
+}
+
+/**
+ * Diagnostic only: sends the default hello_world Utility template to a
+ * hardcoded number, to check whether Utility-category messages deliver when
+ * Marketing-category ones (clinic_intro) don't. Edit TEST_NUMBER, run once
+ * from the editor, check the Execution log for the result and message ID.
+ */
+function testHelloWorld() {
+  var TEST_NUMBER = '917506122462'; // change to whichever number you're testing with
+  var result = sendTemplateMessage(TEST_NUMBER, 'hello_world', 'en_US', []);
+  Logger.log(JSON.stringify(result));
+}
+
+/**
+ * Diagnostic only: sends clinic_intro directly to a hardcoded number,
+ * bypassing the sheet, so the full API response lands straight in the
+ * Execution log here instead of just the message ID in the sheet.
+ */
+function testClinicIntro() {
+  var TEST_NUMBER = '917506122462'; // change to whichever number you're testing with
+  var result = sendTemplateMessage(TEST_NUMBER, 'clinic_intro', 'en', ['Test']);
+  Logger.log(JSON.stringify(result));
 }
 
 /**
@@ -158,7 +192,7 @@ function processRow(sheet, row) {
   sheet.getRange(row, COL.LAST_ATTEMPT).setValue(now);
   if (result.success) {
     sheet.getRange(row, COL.STATUS).setValue('Sent');
-    sheet.getRange(row, COL.ERROR).setValue('');
+    sheet.getRange(row, COL.ERROR).setValue('Message ID: ' + result.messageId);
   } else {
     sheet.getRange(row, COL.STATUS).setValue('Failed');
     sheet.getRange(row, COL.ERROR).setValue(result.error);
@@ -417,8 +451,10 @@ function sendTemplateMessage(toNumber, templateName, templateLang, bodyParams) {
   var code = response.getResponseCode();
   var body = JSON.parse(response.getContentText());
 
+  Logger.log('sendTemplateMessage to ' + toNumber + ' (' + templateName + '/' + templateLang + '): HTTP ' + code + ' — ' + response.getContentText());
+
   if (code === 200 && body.messages) {
-    return { success: true };
+    return { success: true, messageId: body.messages[0] && body.messages[0].id };
   }
   return { success: false, error: body.error ? body.error.message : ('HTTP ' + code) };
 }

@@ -931,6 +931,14 @@ a { color: var(--sky-dark); }
 }
 .book-confirmation h4 { margin: 0 0 6px; color: var(--navy); }
 .book-confirmation p { margin: 0; font-size: 0.92rem; }
+.book-warning {
+  margin-top: 10px !important;
+  padding: 10px 12px;
+  background: var(--warn-bg);
+  border: 1.5px solid var(--warn-border);
+  border-radius: var(--radius-sm);
+  color: #92400e;
+}
 
 /* Credential / badge pills (doctor, founder) */
 .cred-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
