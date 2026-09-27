@@ -232,4 +232,18 @@
       form.reset();
     });
   });
+
+  if ('IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.icon-grid-band .icon-grid').forEach(function (grid) {
+      grid.classList.add('reveal');
+      revealObserver.observe(grid);
+    });
+  }
 })();
