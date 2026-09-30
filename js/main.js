@@ -206,6 +206,7 @@
         return;
       }
       if (errorEl) errorEl.classList.add('hidden');
+      trackContact('callback_form');
 
       // Best-effort: log the lead to the Sheet and trigger the automated WhatsApp
       // template message. Uses mode: 'no-cors' with a plain-text body so the
@@ -231,6 +232,21 @@
       window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + text, '_blank', 'noopener');
       form.reset();
     });
+  });
+
+  // Analytics: tell GTM when someone reaches out. Only the contact method is sent —
+  // never the visitor's name or phone number.
+  function trackContact(method) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'contact_click', contact_method: method });
+  }
+
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest && e.target.closest('a[href]');
+    if (!link) return;
+    var href = link.getAttribute('href');
+    if (href.indexOf('tel:') === 0) trackContact('phone');
+    else if (href.indexOf('https://wa.me/') === 0) trackContact('whatsapp');
   });
 
   if ('IntersectionObserver' in window) {
