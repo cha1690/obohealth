@@ -234,11 +234,46 @@
     });
   });
 
-  // Analytics: tell GTM when someone reaches out. Only the contact method is sent —
-  // never the visitor's name or phone number.
+  // Analytics: tell GTM and Meta when someone reaches out. Only the contact method is
+  // sent — never the visitor's name, phone number or any health information.
+  //
+  // Meta standard events (the Meta Pixel itself is loaded by GTM):
+  //   WhatsApp / phone click → Contact
+  //   Callback form submit   → Lead
+  //   Map / directions click → FindLocation
+  // Each event gets an event_id (also pushed to the dataLayer) so a server-side
+  // Conversions API tag can send the same event and Meta will de-duplicate it.
+  var META_EVENT_FOR = {
+    whatsapp: 'Contact',
+    phone: 'Contact',
+    callback_form: 'Lead',
+    map: 'FindLocation'
+  };
+
+  function newEventId() {
+    return Date.now().toString(36) + '.' + Math.random().toString(36).slice(2, 10);
+  }
+
+  function trackMeta(eventName, params, eventId) {
+    // fbq may not be loaded yet (GTM loads it async) or may be blocked; never break the click.
+    try {
+      if (typeof window.fbq === 'function') {
+        window.fbq('track', eventName, params, { eventID: eventId });
+      }
+    } catch (err) {}
+  }
+
   function trackContact(method) {
+    var eventId = newEventId();
+    var metaEvent = META_EVENT_FOR[method];
     window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: 'contact_click', contact_method: method });
+    window.dataLayer.push({
+      event: 'contact_click',
+      contact_method: method,
+      meta_event_name: metaEvent,
+      event_id: eventId
+    });
+    if (metaEvent) trackMeta(metaEvent, { contact_method: method }, eventId);
   }
 
   document.addEventListener('click', function (e) {
@@ -247,6 +282,7 @@
     var href = link.getAttribute('href');
     if (href.indexOf('tel:') === 0) trackContact('phone');
     else if (href.indexOf('https://wa.me/') === 0) trackContact('whatsapp');
+    else if (href.indexOf('https://www.google.com/maps') === 0) trackContact('map');
   });
 
   if ('IntersectionObserver' in window) {
